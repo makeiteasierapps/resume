@@ -1,0 +1,67 @@
+/* Experience.css */
+
+#experience {
+  background-color: #f8f8f8;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#experience h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.experience-entry {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.experience-entry:last-child {
+  border-bottom: none;
+}
+
+.experience-entry h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.experience-entry .duration {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.experience-entry p {
+  font-size: 1em;
+  color: #333;
+  line-height: 1.5;
+}
+
+.experience-entry .technologies {
+  font-size: 1em;
+  color: #666;
+  margin-top: 10px;
+}
+
+/* Dark Mode */
+
+.dark-mode #experience {
+  background-color: #333;
+}
+
+.dark-mode #experience h2,
+.dark-mode .experience-entry h3,
+.dark-mode .experience-entry p {
+  color: #fff;
+}
+
+.dark-mode .experience-entry .duration,
+.dark-mode .experience-entry .technologies {
+  color: #ddd;
+}

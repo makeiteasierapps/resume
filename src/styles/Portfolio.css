@@ -1,0 +1,23 @@
+/* Portfolio.css */
+
+.portfolio-section {
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 60px 0;
+}
+
+.portfolio-section .section-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.portfolio-section .section-description {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.dark-mode .portfolio-section {
+  background-color: #333;
+  color: #fff;
+}
+

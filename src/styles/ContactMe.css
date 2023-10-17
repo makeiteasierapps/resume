@@ -1,0 +1,82 @@
+/* ContactMe.css */
+
+#contact-me {
+  text-align: center;
+}
+
+#contact-me h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#contact-me form {
+  display: inline-block;
+  text-align: left;
+}
+
+#contact-me form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#contact-me form input[type="text"],
+#contact-me form input[type="email"],
+#contact-me form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+#contact-me form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#contact-me form button:hover {
+  background-color: #45a049;
+}
+
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links a {
+  margin-right: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+.dark-mode #contact-me {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode #contact-me form input[type="text"],
+.dark-mode #contact-me form input[type="email"],
+.dark-mode #contact-me form textarea {
+  background-color: #555;
+  color: #fff;
+  border-color: #777;
+}
+
+.dark-mode #contact-me form button {
+  background-color: #fff;
+  color: #333;
+}
+
+.dark-mode .social-links a {
+  color: #fff;
+}

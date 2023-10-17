@@ -1,0 +1,78 @@
+/* darkmode.css */
+
+/* Dark Mode General Styles */
+
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Dark Mode Navigation Bar */
+
+body.dark-mode .NavBar {
+  background-color: #333;
+}
+
+body.dark-mode .NavBar li a {
+  color: #fff;
+}
+
+body.dark-mode .NavBar .active a {
+  color: #4CAF50;
+}
+
+/* Dark Mode About Me Section */
+
+body.dark-mode #about-me {
+  color: #fff;
+}
+
+/* Dark Mode Skills Section */
+
+body.dark-mode #skills {
+  background-color: #444;
+  color: #fff;
+}
+
+body.dark-mode .progress {
+  background-color: #555;
+}
+
+body.dark-mode .progress-bar {
+  background-color: #4CAF50;
+}
+
+/* Dark Mode Experience Section */
+
+body.dark-mode #experience {
+  background-color: #444;
+  color: #fff;
+}
+
+/* Dark Mode Education Section */
+
+body.dark-mode .Education {
+  background-color: #444;
+  color: #fff;
+}
+
+/* Dark Mode Portfolio Section */
+
+body.dark-mode .portfolio-section {
+  background-color: #444;
+  color: #fff;
+}
+
+/* Dark Mode Contact Me Section */
+
+body.dark-mode #contact-me {
+  background-color: #444;
+  color: #fff;
+}
+
+/* Dark Mode Footer */
+
+body.dark-mode footer {
+  background-color: #333;
+  color: #fff;
+}

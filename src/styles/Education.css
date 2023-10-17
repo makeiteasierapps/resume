@@ -1,0 +1,59 @@
+/* Education.css */
+
+.Education {
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+.Education h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.Education-entry {
+  margin-bottom: 20px;
+}
+
+.Education-entry h3 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.Education-entry h4 {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.Education-entry p {
+  font-size: 1em;
+  color: #999;
+}
+
+.Education-entry ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.Education-entry ul li {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Dark Mode */
+
+.dark-mode .Education {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .Education h2,
+.dark-mode .Education-entry h3,
+.dark-mode .Education-entry h4,
+.dark-mode .Education-entry ul li {
+  color: #fff;
+}
+
+.dark-mode .Education-entry p {
+  color: #ccc;
+}

@@ -1,0 +1,45 @@
+/* Footer.css */
+
+.Footer {
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+}
+
+.Footer p {
+  margin: 0;
+  padding: 5px;
+  color: #333;
+  font-size: 14px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.social-links a {
+  color: #333;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  color: #4CAF50;
+}
+
+.dark-mode .Footer {
+  background-color: #333;
+  border-top: 1px solid #fff;
+}
+
+.dark-mode .Footer p,
+.dark-mode .social-links a {
+  color: #fff;
+}
+
+.dark-mode .social-links a:hover {
+  color: #4CAF50;
+}

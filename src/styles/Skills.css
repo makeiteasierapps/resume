@@ -1,0 +1,58 @@
+/* Skills.css */
+
+#skills {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+.skill {
+  width: 200px;
+  margin: 10px;
+}
+
+.skill label {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.progress {
+  background-color: #f8f8f8;
+  border-radius: 3px;
+  height: 20px;
+  width: 100%;
+}
+
+.progress-bar {
+  background-color: #4CAF50;
+  border-radius: 3px;
+  height: 100%;
+  position: relative;
+}
+
+.skill-level {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+/* Dark Mode */
+
+.dark-mode #skills {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .progress {
+  background-color: #555;
+}
+
+.dark-mode .progress-bar {
+  background-color: #4CAF50;
+}
