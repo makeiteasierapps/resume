@@ -1,64 +1,58 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import '../styles/ContactMe.css';
+import React, { useContext } from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { ThemeContext } from '../contexts/ThemeContext';
+
+const SocialLink = ({ href, Icon, className }) => (
+    <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`text-dark text-decoration-none ${className}`}
+    >
+        <Icon size={50} />
+    </a>
+);
 
 const ContactMe = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+    const theme = useContext(ThemeContext);
+    const socialLinks = [
+        {
+            href: 'https://www.linkedin.com/in/yourusername',
+            Icon: FaLinkedin,
+            className: 'mr-4',
+        },
+        {
+            href: 'https://github.com/makeiteasierapps',
+            Icon: FaGithub,
+            className: '',
+        },
+    ];
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'message':
-        setMessage(value);
-        break;
-      default:
-        break;
-    }
-  }
+    return (
+        <Container
+            fluid
+            className="d-flex text-center justify-content-center align-items-center"
+            id="contact"
+            style={{
+                minHeight: '700px',
+                backgroundColor: theme.lightBlue,
+                color: theme.deepPurple,
+            }}
+        >
+            <Row>
+                <Col>
+                    <h2 className="mb-4">Contact Me</h2>
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Here you can handle the form submission. For example, you can send an email or save the message to a database.
-    console.log({ name, email, message });
-  }
-
-  return (
-    <Container id="contact-me">
-      <Row>
-        <Col>
-          <h2>Contact Me</h2>
-          <Form onSubmit={handleSubmit}>
-            <FormGroup>
-              <Label for="name">Name:</Label>
-              <Input type="text" name="name" value={name} onChange={handleInputChange} required />
-            </FormGroup>
-            <FormGroup>
-              <Label for="email">Email:</Label>
-              <Input type="email" name="email" value={email} onChange={handleInputChange} required />
-            </FormGroup>
-            <FormGroup>
-              <Label for="message">Message:</Label>
-              <Input type="textarea" name="message" value={message} onChange={handleInputChange} required />
-            </FormGroup>
-            <Button type="submit">Send</Button>
-          </Form>
-          <div className="social-links">
-            <a href="https://www.linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
+                    <div className="m-4">
+                        {socialLinks.map((link, index) => (
+                            <SocialLink key={index} {...link} />
+                        ))}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+    );
+};
 
 export default ContactMe;
-

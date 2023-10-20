@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import '../styles/Footer.css';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  return (
-    <Container tag="footer" className="Footer">
-      <Row>
-        <Col>
-          <p>&copy; {currentYear} Your Name. All rights reserved.</p>
-          <p>Designed and developed by Your Name</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="social-links">
-          <a href="https://www.linkedin.com/in/your-linkedin-profile/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
+    const currentYear = new Date().getFullYear();
+    const theme = useContext(ThemeContext);
+    return (
+        <Container
+            fluid
+            tag="footer"
+            className="text-center py-3 border-top"
+            style={{ backgroundColor: theme.deepPurple, color: theme.vibrantTeal }}
+        >
+            <Row>
+                <Col>
+                    <p className="mb-0 py-2 small">
+                        &copy; {currentYear} Shaun Offenbacher. All rights
+                        reserved.
+                    </p>
+                    <p className="mb-0 py-2 small">
+                        Designed and developed by Shaun Offenbacher
+                    </p>
+                </Col>
+            </Row>
+        </Container>
+    );
+};
 
 export default Footer;

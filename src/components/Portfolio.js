@@ -1,18 +1,30 @@
-import React from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../contexts/ThemeContext';
 import { Container, Row, Col } from 'reactstrap';
-import '../styles/Portfolio.css';
 
 const Portfolio = () => {
-  return (
-    <Container id="portfolio" className="portfolio-section">
-      <Row>
-        <Col>
-          <h2 className="section-title">Portfolio</h2>
-          <p className="section-description">Exciting projects coming soon!</p>
-        </Col>
-      </Row>
-    </Container>
-  );
-}
+    const theme = useContext(ThemeContext);
+    return (
+        <Container
+            id="portfolio"
+            className="d-flex text-center justify-content-center align-items-center"
+            style={{
+                backgroundColor: theme.deepPurple,
+                color: theme.vibrantTeal,
+                minHeight: '700px',
+            }}
+            fluid
+        >
+            <Row>
+                <Col>
+                    <h2 className="display-4 mb-3">Portfolio</h2>
+                    <p className="lead">
+                        Exciting projects coming soon!
+                    </p>
+                </Col>
+            </Row>
+        </Container>
+    );
+};
 
 export default Portfolio;

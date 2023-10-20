@@ -1,33 +1,34 @@
-import React from "react";
-import NavBar from "./components/NavBar";
-import AboutMe from "./components/AboutMe";
-import Skills from "./components/Skills";
-import Experience from "./components/Experience";
-import Education from "./components/Education";
-import Portfolio from "./components/Portfolio";
-import ContactMe from "./components/ContactMe";
-import Footer from "./components/Footer";
-import "./styles/App.css";
+import { ThemeContext } from './contexts/ThemeContext';
+import NavBar from './components/Header';
+import Skills from './components/Skills';
+
+import Education from './components/Education';
+import Portfolio from './components/Portfolio';
+import ContactMe from './components/ContactMe';
+import Footer from './components/Footer';
+import AboutMeAndAvatar from './components/aboutMe/AboutMeAndAvatar';
+import { Col, Row } from 'reactstrap';
+import './styles/App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
-  const [darkMode, setDarkMode] = React.useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(prevDarkMode => !prevDarkMode);
-  };
-
-  return (
-    <div className={darkMode ? "App dark-mode" : "App"}>
-      <NavBar toggleDarkMode={toggleDarkMode} />
-      <AboutMe />
-      <Skills />
-      <Experience />
-      <Education />
-      <Portfolio />
-      <ContactMe />
-      <Footer />
-    </div>
-  );
-}
+    return (
+        <ThemeContext.Provider value={ThemeContext._currentValue}>
+            <div>
+                <NavBar />
+                <Row>
+                    <Col>
+                        <AboutMeAndAvatar />
+                    </Col>
+                </Row>
+                <Education />
+                <Skills />
+                <Portfolio />
+                <ContactMe />
+                <Footer />
+            </div>
+        </ThemeContext.Provider>
+    );
+};
 
 export default App;
