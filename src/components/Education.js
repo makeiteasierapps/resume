@@ -1,43 +1,89 @@
 import React, { useState, useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-import {
-    Container,
-    Row,
-    Col,
-    Card,
-    CardBody,
-    CardTitle,
-    CardSubtitle,
-    CardText,
-    ListGroup,
-    ListGroupItem,
-} from 'reactstrap';
-import ReactCardFlip from 'react-card-flip';
-import BackendCert from '../assets/badges/python/Modern_Software_Engineering_with_DevOps-Backend,_SQL,_and_DevOps_with_Python_Certificate___Honor_Student_21430.png';
+import { Container, Row, Card, CardBody, CardText } from 'reactstrap';
+import DevOPs from '../assets/badges/devOps.png';
+import SQL from '../assets/badges/sql.png';
+import BackendCert from '../assets/badges/mseDevOps.png';
+import JsFundamentals from '../assets/badges/jsFundamentals.png';
+import PythonFundamentals from '../assets/badges/pythonFundamentals.png';
+import WebFundamentals from '../assets/badges/webFundamentals.png';
+import Carousel from 'react-spring-3d-carousel';
+import { useSpring, animated } from 'react-spring';
+
+const education = [
+    {
+        degree: 'Backend, SQL, and DevOps with Python',
+        image: BackendCert,
+    },
+    {
+        degree: 'JavaScript Fundamentals',
+        image: JsFundamentals,
+    },
+
+    {
+        degree: 'Python Fundamnetals',
+        image: PythonFundamentals,
+    },
+    {
+        degree: 'Web Fundamentals',
+        image: WebFundamentals,
+    },
+    {
+        degree: 'DevOPs with Python',
+        image: DevOPs,
+    },
+    {
+        degree: 'SQL with Python',
+        image: SQL,
+    },
+];
 
 const Education = () => {
     const theme = useContext(ThemeContext);
-    const [education] = useState([
-        {
-            degree: 'JavaScript Fundamentals',
-            institution: 'nucamp',
-            courses: ['Data Structures', 'Async/Await', 'Loops/Arrays'],
-        },
-        {
-            degree: 'Backend, SQL, and DevOps with Python',
-            institution: 'nucamp',
-            courses: ['Docker', 'SQL', 'Python', 'Flask'],
-        },
-    ]);
-    const [isFlipped, setIsFlipped] = useState(
-        Array(education.length).fill(false)
-    );
+    const props = useSpring({
+        opacity: 1,
+        transform: 'scale(1)',
+        from: { opacity: 0, transform: 'scale(0.3)' },
+    });
+    const [slideIndex, setSlideIndex] = useState(0);
 
-    const handleFlip = (index) => {
-        const newFlippedState = [...isFlipped];
-        newFlippedState[index] = !newFlippedState[index];
-        setIsFlipped(newFlippedState);
-    };
+    const slides = education.map((edu, index) => ({
+        key: index,
+        content: (
+            <animated.div style={props}>
+                <Card
+                    className="text-center"
+                    style={{
+                        backgroundColor: theme.lightBlue,
+                        color: theme.deepPurple,
+                        width: '300px',
+                        height: '400px',
+                        boxShadow: '0px 4px 8px rgba(255, 255, 255, 0.2)',
+                    }}
+                    onClick={() => setSlideIndex(index)}
+                >
+                    {edu.degree === 'Backend, SQL, and DevOps with Python' ? (
+                        <img src={edu.image} alt={edu.degree} />
+                    ) : (
+                        <>
+                            <img src={edu.image} alt={edu.degree} />
+                            <CardBody className="d-flex justify-content-center align-items-center">
+                                <CardText
+                                    style={{
+                                        fontWeight: 'bold',
+                                        fontSize: '1.9em',
+                                        fontFamily: theme.fontFamily,
+                                    }}
+                                >
+                                    {edu.degree}
+                                </CardText>
+                            </CardBody>
+                        </>
+                    )}
+                </Card>
+            </animated.div>
+        ),
+    }));
 
     return (
         <Container
@@ -45,58 +91,22 @@ const Education = () => {
             style={{
                 backgroundColor: theme.deepPurple,
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: '800px',
+                height: '100vh',
             }}
             id="education"
         >
-            <Row className="justify-content-around">
-                {education.map((edu, index) => (
-                    <Col key={index}>
-                        <ReactCardFlip
-                            isFlipped={isFlipped[index]}
-                            flipDirection="horizontal"
-                        >
-                            <Card
-                                style={{
-                                    backgroundColor: theme.lightBlue,
-                                    color: theme.deepPurple,
-                                    width: '300px',
-                                    height: '400px',
-                                    boxShadow: '0px 4px 8px rgba(255, 255, 255, 0.2)',
-                                }}
-                                onMouseEnter={() => handleFlip(index)}
-                                className="text-center"
-                            >
-                                <CardBody className="d-flex justify-content-center align-items-center">
-                                    <CardText
-                                        style={{
-                                            fontWeight: 'bold',
-                                            fontSize: '1.9em',
-                                        }}
-                                    >
-                                        {edu.degree}
-                                    </CardText>
-                                </CardBody>
-                            </Card>
-                            <Card onMouseLeave={() => handleFlip(index)}>
-                                <img
-                                    src={BackendCert}
-                                    alt="Certificate"
-                                    style={{
-                                        width: '300px',
-                                        height: '400px',
-                                        boxShadow:
-                                            '0px 4px 8px rgba(0, 0, 0, 0.2)',
-                                    }}
-                                />
-                            </Card>
-                        </ReactCardFlip>
-                    </Col>
-                ))}
-            </Row>
+            <Container
+                style={{
+                    display: 'flex',
+                    width: '90%', // take up 90% of parent's width
+                    flex: 1,
+                }}
+            >
+                <Carousel slides={slides} goToSlide={slideIndex} />
+            </Container>
         </Container>
     );
 };

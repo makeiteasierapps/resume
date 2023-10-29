@@ -35,9 +35,9 @@ const ContactMe = () => {
             className="d-flex text-center justify-content-center align-items-center"
             id="contact"
             style={{
-                minHeight: '700px',
                 backgroundColor: theme.lightBlue,
                 color: theme.deepPurple,
+                height: '100vh',
             }}
         >
             <Row>

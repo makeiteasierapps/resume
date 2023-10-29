@@ -5,55 +5,74 @@ const Header = () => {
     const theme = useContext(ThemeContext);
     return (
         <Navbar
-            expand="md"
+            expand="xs"
             fixed="top"
             style={{ backgroundColor: theme.deepPurple }}
         >
-            <Container>
-                <Nav className="d-flex justify-content-center" navbar>
-                    <NavItem>
-                        <NavLink
-                            href="#home"
-                            style={{ color: theme.vibrantTeal }}
-                        >
-                            Home
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            href="#about"
-                            style={{ color: theme.vibrantTeal }}
-                        >
-                            About
-                        </NavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NavLink
-                            href="#education"
-                            style={{ color: theme.vibrantTeal }}
-                        >
-                            Education
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            href="#portfolio"
-                            style={{ color: theme.vibrantTeal }}
-                        >
-                            Portfolio
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            href="#contact"
-                            style={{ color: theme.vibrantTeal }}
-                        >
-                            Contact
-                        </NavLink>
-                    </NavItem>
-                </Nav>
-            </Container>
+            <Nav
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '100%',
+                }}
+                navbar
+            >
+                <NavItem>
+                    <NavLink
+                        href="#home"
+                        style={{
+                            color: theme.vibrantTeal,
+                            fontFamily: theme.fontFamily,
+                        }}
+                    >
+                        Home
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                        href="#education"
+                        style={{
+                            color: theme.vibrantTeal,
+                            fontFamily: theme.fontFamily,
+                        }}
+                    >
+                        Education
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                        href="#skills"
+                        style={{
+                            color: theme.vibrantTeal,
+                            fontFamily: theme.fontFamily,
+                        }}
+                    >
+                        Skills
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                        href="#portfolio"
+                        style={{
+                            color: theme.vibrantTeal,
+                            fontFamily: theme.fontFamily,
+                        }}
+                    >
+                        Portfolio
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                        href="#contact"
+                        style={{
+                            color: theme.vibrantTeal,
+                            fontFamily: theme.fontFamily,
+                        }}
+                    >
+                        Contact
+                    </NavLink>
+                </NavItem>
+            </Nav>
         </Navbar>
     );
 };

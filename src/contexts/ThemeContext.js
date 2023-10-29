@@ -6,4 +6,5 @@ export const ThemeContext = React.createContext({
   lightBlue: '#e5fcff', // for buttons or call-to-action elements
   vibrantTeal: '#3891a6', // for accents or highlights
   darkTeal: '#0d5c63', // for text or body content
+  fontFamily: 'Comfortaa, sans-serif',
 });
