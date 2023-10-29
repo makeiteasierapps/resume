@@ -1,59 +1,76 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Container, Card, CardBody, CardText } from 'reactstrap';
+import React, { useContext } from 'react';
+import { Container, Row, Col } from 'reactstrap';
 import { ThemeContext } from '../contexts/ThemeContext';
+
+import { useSpring, animated } from 'react-spring';
+import { useInView } from 'react-intersection-observer';
+import { ReactComponent as FirebaseIcon } from '../assets/skillsIcons/Firebase_Logo.svg';
+import { ReactComponent as DockerIcon } from '../assets/skillsIcons/docker_logo.svg';
+import { ReactComponent as PythonIcon } from '../assets/skillsIcons/python-icon.svg';
+import { ReactComponent as ReactIcon } from '../assets/skillsIcons/react-2.svg';
+import { ReactComponent as JsIcon } from '../assets/skillsIcons/js_logo.svg';
+import { ReactComponent as BootstrapIcon } from '../assets/skillsIcons/bootstrap_5_logo.svg';
+import { ReactComponent as MaterialIcon } from '../assets/skillsIcons/material_logo.svg';
+
+const SkillsIcon = ({ delay, icon: Icon }) => {
+    const [ref, inView] = useInView();
+    const props = useSpring({
+        from: {
+            opacity: 0,
+            marginTop: 100,
+            marginBottom: -100,
+            marginLeft: 100,
+            marginRight: -100,
+        },
+        to: {
+            opacity: inView ? 1 : 0,
+            marginTop: inView ? 0 : 100,
+            marginBottom: inView ? 0 : -100,
+            marginLeft: inView ? 0 : 100,
+            marginRight: inView ? 0 : -100,
+        },
+        delay: delay,
+    });
+
+    return (
+        <animated.div ref={ref} style={props}>
+            <Icon width="200" />
+        </animated.div>
+    );
+};
 
 const Skills = () => {
     const skills = [
-        { name: 'JavaScript' },
-        { name: 'React' },
-        { name: 'Python' },
-        { name: 'Firebase' },
+        { icon: JsIcon },
+        { icon: ReactIcon },
+        { icon: PythonIcon },
+        { icon: FirebaseIcon },
+        { icon: DockerIcon },
+        { icon: BootstrapIcon },
+        { icon: MaterialIcon },
     ];
 
-    const [positions, setPositions] = useState([]);
-
     const theme = useContext(ThemeContext);
-    useEffect(() => {
-        const updatePositions = () => {
-            const newPositions = skills.map(() => ({
-                top: `${Math.random() * 80}%`,
-                left: `${Math.random() * 80}%`,
-            }));
-            setPositions(newPositions);
-        };
-
-        // Update positions immediately on mount
-        updatePositions();
-
-        // Then update positions every 5 seconds
-        const intervalId = setInterval(updatePositions, 7000);
-
-        // Clean up interval on unmount
-        return () => clearInterval(intervalId);
-    }, []);
 
     return (
-        <div style={{ backgroundColor: theme.lightBlue, minHeight: '500px' }}>
-            <Container
-                id="skills"
-                className="position-relative"
-                style={{ width: '100%', minHeight: '800px' }}
-            >
+        <Container
+            className="d-flex"
+            id="skills"
+            style={{ height: '100vh', backgroundColor: theme.lightBlue }}
+            fluid
+        >
+            <Row className="justify-content-center align-items-center">
                 {skills.map((skill, index) => (
-                    <Card
+                    <Col
+                        md={4}
                         key={index}
-                        className="position-absolute m-2 skill-card"
-                        style={{...positions[index], backgroundColor: theme.deepPurple, color: theme.lightBlue}}
+                        className="d-flex justify-content-center align-items-center"
                     >
-                        <CardBody className="card-face face-front">
-                            <CardText className="d-block fs-5 mb-2">
-                                {skill.name}
-                            </CardText>
-                        </CardBody>
-                    </Card>
+                        <SkillsIcon delay={index * 400} icon={skill.icon} />
+                    </Col>
                 ))}
-            </Container>
-        </div>
+            </Row>
+        </Container>
     );
 };
 

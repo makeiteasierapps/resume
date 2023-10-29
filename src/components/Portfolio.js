@@ -11,16 +11,14 @@ const Portfolio = () => {
             style={{
                 backgroundColor: theme.deepPurple,
                 color: theme.vibrantTeal,
-                minHeight: '700px',
+                height: '100vh',
             }}
             fluid
         >
             <Row>
                 <Col>
                     <h2 className="display-4 mb-3">Portfolio</h2>
-                    <p className="lead">
-                        Exciting projects coming soon!
-                    </p>
+                    <p className="lead">Exciting projects coming soon!</p>
                 </Col>
             </Row>
         </Container>
