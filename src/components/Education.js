@@ -58,8 +58,8 @@ const Education = () => {
                     style={{
                         backgroundColor: 'white',
                         color: theme.deepPurple,
-                        width: '300px',
-                        height: '400px',
+                        width: '30vh',
+                        height: '40vh',
                         boxShadow: '0px 4px 8px rgba(255, 255, 255, 0.2)',
                     }}
                     onClick={() => setSlideIndex(index)}
@@ -78,7 +78,7 @@ const Education = () => {
                                 <CardText
                                     style={{
                                         fontWeight: 'bold',
-                                        fontSize: '1.9em',
+                                        fontSize: '3vh',
                                         fontFamily: theme.mainText,
                                     }}
                                 >
