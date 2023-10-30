@@ -1,7 +1,4 @@
-import React, { useContext } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { ThemeContext } from '../contexts/ThemeContext';
-
 import { useSpring, animated } from 'react-spring';
 import { useInView } from 'react-intersection-observer';
 import { ReactComponent as FirebaseIcon } from '../assets/skillsIcons/Firebase_Logo.svg';
@@ -29,10 +26,10 @@ const AnnimatedSkillsIcon = ({ delay, icon: Icon }) => {
     });
 
     return (
-        <animated.div ref={ref} style={props}>
-            <Icon width="10vw" />
-        </animated.div>
-    );
+      <animated.div ref={ref} style={props}>
+          <Icon style={{ width: 'clamp(100px, 10vw, 200px)' }} />
+      </animated.div>
+  );
 };
 
 const Skills = () => {
@@ -46,13 +43,11 @@ const Skills = () => {
         { icon: MaterialIcon },
     ];
 
-    const theme = useContext(ThemeContext);
-
     return (
         <Container
             className="d-flex justify-content-center"
             id="skills"
-            style={{ height: '100vh', backgroundColor: theme.lightBlue }}
+            style={{ height: '100vh', backgroundColor: 'white' }}
             fluid
         >
             <Row className=" d-flex justify-content-center align-items-center">
