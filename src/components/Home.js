@@ -2,10 +2,9 @@ import React, { useContext } from 'react';
 import { Container, Col } from 'reactstrap';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { CardImg } from 'reactstrap';
-import myAvatar from '../assets/myAvatar.png';
 import { useSpring, animated } from 'react-spring';
 import '../styles/Home.scss';
-import  shaunoProfile  from '../assets/shauno_profile.png';
+import shaunoProfile from '../assets/shauno_profile.png';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -86,8 +85,7 @@ const Home = () => {
                             <CardImg
                                 style={{
                                     height: 'auto',
-                                    width: '23vw',
-                                    maxWidth: '250px',
+                                    width: 'clamp(150px, 23vw, 250px)',
                                 }}
                                 src={shaunoProfile}
                                 alt="my avatar"
