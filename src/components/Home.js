@@ -18,7 +18,7 @@ const Home = () => {
     });
 
     const pageStyle = {
-        backgroundColor: theme.lightBlue,
+        backgroundColor: 'white',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
@@ -45,12 +45,21 @@ const Home = () => {
                         <Col xs="12" md="10">
                             <Container className="text-wrap">
                                 <Container
-                                    className="my-3 fs-1 text-wrap"
+                                    className="mt-2 fs-1 text-wrap"
                                     style={{
                                         fontWeight: '700',
                                     }}
                                 >
-                                    Welcome!
+                                    Shaun Offenbacher
+                                </Container>
+                                <Container
+                                    className="mb-3 fs-5 text-wrap"
+                                    style={{
+                                        fontWeight: '500',
+                                        fontStyle: 'italic',
+                                    }}
+                                >
+                                    Software Engineer
                                 </Container>
                                 <Container
                                     className="responsive-text"

@@ -68,13 +68,17 @@ const ContactMe = () => {
             className="d-flex text-center flex-column justify-content-center align-items-center"
             id="contact"
             style={{
-                backgroundColor: theme.lightBlue,
+                backgroundColor: 'white',
                 height: '100vh',
             }}
         >
             <Container
                 className="mb-4 h1"
-                style={{ fontFamily: theme.mainText, fontWeight:'600', color: theme.deepPurple }}
+                style={{
+                    fontFamily: theme.mainText,
+                    fontWeight: '600',
+                    color: theme.deepPurple,
+                }}
             >
                 Let's Connect!
             </Container>
