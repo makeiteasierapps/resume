@@ -5,6 +5,7 @@ import { CardImg } from 'reactstrap';
 import myAvatar from '../assets/myAvatar.png';
 import { useSpring, animated } from 'react-spring';
 import '../styles/Home.scss';
+import  shaunoProfile  from '../assets/shauno_profile.png';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -88,7 +89,7 @@ const Home = () => {
                                     width: '23vw',
                                     maxWidth: '250px',
                                 }}
-                                src={myAvatar}
+                                src={shaunoProfile}
                                 alt="my avatar"
                                 className="rounded-circle img-fluid"
                             />
