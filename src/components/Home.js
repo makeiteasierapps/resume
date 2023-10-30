@@ -40,6 +40,8 @@ const Home = () => {
         justifyContent: 'space-evenly',
         width: '100%',
         height: '100vh',
+        fontFamily: theme.mainText,
+        color: theme.deepPurple,
     };
 
     useChain([firstRowRef, secondRowRef, thirdRowRef], [0, 1, 2]);
@@ -62,23 +64,22 @@ const Home = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <div
-                            className="text-wrap"
-                            style={{
-                                fontFamily: theme.fontFamily,
-                                fontWeight: 'bold',
-                            }}
-                        >
+                        <div className="text-wrap">
                             <h2
                                 className="m-3 fs-1"
                                 style={{
-                                    fontFamily: theme.fontFamily,
-                                    color: theme.deepPurple,
+                                    
+                                    fontWeight: '700',
                                 }}
                             >
                                 Welcome!
                             </h2>
-                            <p className="mb-md-3 responsive-text">
+                            <p
+                                className="mb-md-3 responsive-text"
+                                style={{
+                                    fontWeight: '500',
+                                }}
+                            >
                                 I'm a passionate web developer with a love for
                                 creating digital experiences through code. With
                                 a background in fine dining as a food server,
@@ -105,17 +106,13 @@ const Home = () => {
                 springRef={secondRowRef}
                 className="d-flex justify-content-end mt-3"
             >
-                <Col
-                    xs="12"
-                    md="9"
-                    xl="10"
-                    className="text-wrap"
-                    style={{
-                        fontFamily: theme.fontFamily,
-                        fontWeight: 'bold',
-                    }}
-                >
-                    <p className="m-4 responsive-text">
+                <Col xs="12" md="9" xl="10" className="text-wrap">
+                    <p
+                        className="m-4 responsive-text"
+                        style={{
+                            fontWeight: '500',
+                        }}
+                    >
                         As a fine dining food server, I developed a strong
                         attention to detail and a commitment to delivering
                         exceptional service. These qualities have seamlessly
@@ -140,8 +137,7 @@ const Home = () => {
                     xl="10"
                     className="text-wrap"
                     style={{
-                        fontFamily: theme.fontFamily,
-                        fontWeight: 'bold',
+                        fontWeight: '500',
                     }}
                 >
                     <p className="m-4 responsive-text">

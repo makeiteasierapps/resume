@@ -10,13 +10,13 @@ const Portfolio = () => {
             className="d-flex text-center justify-content-center align-items-center"
             style={{
                 backgroundColor: theme.deepPurple,
-                color: theme.vibrantTeal,
+                color: theme.lightBlue,
                 height: '100vh',
             }}
             fluid
         >
             <Row>
-                <Col>
+                <Col style={{ fontFamily: theme.oswald }}>
                     <h2 className="display-4 mb-3">Portfolio</h2>
                     <p className="lead">Exciting projects coming soon!</p>
                 </Col>
