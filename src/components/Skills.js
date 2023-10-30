@@ -17,13 +17,13 @@ const AnnimatedSkillsIcon = ({ delay, icon: Icon }) => {
     const props = useSpring({
         from: {
             opacity: 0,
-            marginTop: 100,
-            marginBottom: -100,
+            marginTop: 50,
+            marginBottom: -50,
         },
         to: {
             opacity: inView ? 1 : 0,
-            marginTop: inView ? 0 : 100,
-            marginBottom: inView ? 0 : -100,
+            marginTop: inView ? 0 : 50,
+            marginBottom: inView ? 0 : -50,
         },
         delay: delay,
     });
