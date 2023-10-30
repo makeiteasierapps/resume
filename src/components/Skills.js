@@ -10,7 +10,10 @@ import { ReactComponent as BootstrapIcon } from '../assets/skillsIcons/bootstrap
 import { ReactComponent as MaterialIcon } from '../assets/skillsIcons/material_logo.svg';
 
 const AnnimatedSkillsIcon = ({ delay, icon: Icon }) => {
-    const [ref, inView] = useInView();
+    const [ref, inView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
     const props = useSpring({
         from: {
             opacity: 0,
@@ -26,10 +29,10 @@ const AnnimatedSkillsIcon = ({ delay, icon: Icon }) => {
     });
 
     return (
-      <animated.div ref={ref} style={props}>
-          <Icon style={{ width: 'clamp(100px, 10vw, 200px)' }} />
-      </animated.div>
-  );
+        <animated.div ref={ref} style={props}>
+            <Icon style={{ width: 'clamp(100px, 10vw, 200px)' }} />
+        </animated.div>
+    );
 };
 
 const Skills = () => {
