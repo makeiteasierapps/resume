@@ -91,8 +91,8 @@ const Home = () => {
                         </div>
                         <CardImg
                             style={{
-                                height: '200px',
-                                width: '200px',
+                                height: '25vh',
+                                width: '25vh',
                                 marginLeft: '20px',
                             }}
                             src={myAvatar}
