@@ -12,7 +12,7 @@ import { ReactComponent as JsIcon } from '../assets/skillsIcons/js_logo.svg';
 import { ReactComponent as BootstrapIcon } from '../assets/skillsIcons/bootstrap_5_logo.svg';
 import { ReactComponent as MaterialIcon } from '../assets/skillsIcons/material_logo.svg';
 
-const SkillsIcon = ({ delay, icon: Icon }) => {
+const AnnimatedSkillsIcon = ({ delay, icon: Icon }) => {
     const [ref, inView] = useInView();
     const props = useSpring({
         from: {
@@ -66,7 +66,7 @@ const Skills = () => {
                         key={index}
                         className="d-flex justify-content-center align-items-center"
                     >
-                        <SkillsIcon delay={index * 400} icon={skill.icon} />
+                        <AnnimatedSkillsIcon delay={index * 400} icon={skill.icon} />
                     </Col>
                 ))}
             </Row>

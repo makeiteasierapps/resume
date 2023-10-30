@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Navbar, Nav, NavItem, NavLink, Container } from 'reactstrap';
+import { Navbar, Nav, NavItem, NavLink } from 'reactstrap';
 import { ThemeContext } from '../contexts/ThemeContext';
 const Header = () => {
     const theme = useContext(ThemeContext);
@@ -14,6 +14,8 @@ const Header = () => {
                     display: 'flex',
                     justifyContent: 'center',
                     width: '100%',
+                    fontFamily: theme.mainText,
+                    color: theme.lightBlue,
                 }}
                 navbar
             >
@@ -21,55 +23,50 @@ const Header = () => {
                     <NavLink
                         href="#home"
                         style={{
-                            color: theme.vibrantTeal,
-                            fontFamily: theme.fontFamily,
+                            color: theme.lightBlue,
                         }}
                     >
-                        Home
+                        HOME
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
                         href="#education"
                         style={{
-                            color: theme.vibrantTeal,
-                            fontFamily: theme.fontFamily,
+                            color: theme.lightBlue,
                         }}
                     >
-                        Education
+                        EDUCATION
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
                         href="#skills"
                         style={{
-                            color: theme.vibrantTeal,
-                            fontFamily: theme.fontFamily,
+                            color: theme.lightBlue,
                         }}
                     >
-                        Skills
+                        SKILLS
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
                         href="#portfolio"
                         style={{
-                            color: theme.vibrantTeal,
-                            fontFamily: theme.fontFamily,
+                            color: theme.lightBlue,
                         }}
                     >
-                        Portfolio
+                        PORTFOLIO
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
                         href="#contact"
                         style={{
-                            color: theme.vibrantTeal,
-                            fontFamily: theme.fontFamily,
+                            color: theme.lightBlue,
                         }}
                     >
-                        Contact
+                        CONTACT
                     </NavLink>
                 </NavItem>
             </Nav>
