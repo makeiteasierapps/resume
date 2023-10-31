@@ -81,11 +81,7 @@ const Home = () => {
                                 </Container>
                             </Container>
                         </Col>
-                        <Col
-                            xs="12"
-                            md="4"
-                            className="align-self-center mt-5 mt-md-0"
-                        >
+                        <Col xs="12" md="4" className="align-self-center">
                             <CardImg
                                 style={{
                                     height: 'auto',
