@@ -96,7 +96,7 @@ const Education = () => {
         <Container
             fluid
             style={{
-                backgroundColor: theme.deepPurple,
+                backgroundColor: 'black',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
