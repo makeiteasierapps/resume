@@ -10,7 +10,7 @@ const Footer = () => {
             fluid
             tag="footer"
             className="text-center py-3 border-top"
-            style={{ backgroundColor: theme.deepPurple, color: theme.lightBlue }}
+            style={{ backgroundColor: 'black', color: theme.lightBlue }}
         >
             <Row>
                 <Col>

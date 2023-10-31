@@ -7,7 +7,7 @@ const Header = () => {
         <Navbar
             expand="xs"
             fixed="top"
-            style={{ backgroundColor: theme.deepPurple }}
+            style={{ backgroundColor: 'black' }}
         >
             <Nav
                 style={{

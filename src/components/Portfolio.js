@@ -9,7 +9,7 @@ const Portfolio = () => {
             id="portfolio"
             className="d-flex text-center justify-content-center align-items-center"
             style={{
-                backgroundColor: theme.deepPurple,
+                backgroundColor: 'black',
                 color: theme.lightBlue,
                 height: '100vh',
             }}
