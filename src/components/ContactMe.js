@@ -41,11 +41,11 @@ const SocialLink = ({ href, Icon, type }) => {
                     icon={Icon}
                     style={{
                         fontSize: '6em',
-                        color: theme.deepPurple,
+                        color: 'black',
                     }}
                 />
             ) : (
-                <Icon size={'6em'} style={{ color: theme.deepPurple }} />
+                <Icon size={'6em'} style={{ color: 'black' }} />
             )}
         </a>
     );
@@ -77,7 +77,7 @@ const ContactMe = () => {
                 style={{
                     fontFamily: theme.mainText,
                     fontWeight: '600',
-                    color: theme.deepPurple,
+                    color: 'black',
                 }}
             >
                 Let's Connect!
@@ -99,7 +99,7 @@ const ContactMe = () => {
                         <Button
                             onContextMenu={(e) => e.preventDefault()}
                             style={{
-                                backgroundColor: theme.deepPurple,
+                                backgroundColor: 'black',
                             }}
                         >
                             shaunoffenbacher@yahoo.com
@@ -108,7 +108,7 @@ const ContactMe = () => {
                     <DropdownMenu
                         style={{
                             marginTop: '10px',
-                            backgroundColor: theme.deepPurple,
+                            backgroundColor: 'black',
                             left: '50%',
                             transform: 'translateX(-50%)',
                         }}

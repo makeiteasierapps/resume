@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Container, Col } from 'reactstrap';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { CardImg } from 'reactstrap';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, config } from 'react-spring';
 import '../styles/Home.scss';
 import shaunoProfile from '../assets/shauno_profile.png';
 
@@ -12,9 +12,9 @@ const Home = () => {
     const [ref, inView] = useInView();
     const theme = useContext(ThemeContext);
     const props = useSpring({
-        from: { opacity: 0 },
-        to: { opacity: inView ? 1 : 0 },
-        config: { mass: 1, tension: 30, friction: 90 },
+        from: { opacity: 0, transform: 'translate3d(0,40px,0)' },
+        to: { opacity: inView ? 1 : 0, transform: 'translate3d(0,0px,0)' },
+        config: { tension: 210, friction: 20 },
     });
 
     const pageStyle = {
@@ -25,7 +25,7 @@ const Home = () => {
         width: '100%',
         height: '100vh',
         fontFamily: theme.mainText,
-        color: theme.deepPurple,
+        color: 'black',
     };
 
     return (
@@ -81,7 +81,11 @@ const Home = () => {
                                 </Container>
                             </Container>
                         </Col>
-                        <Col xs="12" md="4" className="align-self-center mt-5 mt-md-0">
+                        <Col
+                            xs="12"
+                            md="4"
+                            className="align-self-center mt-5 mt-md-0"
+                        >
                             <CardImg
                                 style={{
                                     height: 'auto',
