@@ -40,7 +40,7 @@ const Home = () => {
                 style={props}
                 className="d-flex align-items-center justify-content-center mt-md-3"
             >
-                <Col xs="12" md="9" xl="9">
+                <Col xs="12" md="9">
                     <Container className="d-flex flex-column-reverse flex-md-row justify-content-center align-items-center">
                         <Col xs="12" md="10">
                             <Container className="text-wrap">
@@ -85,7 +85,7 @@ const Home = () => {
                             <CardImg
                                 style={{
                                     height: 'auto',
-                                    width: 'clamp(150px, 23vw, 250px)',
+                                    width: 'clamp(9.375rem, 23vw, 15.625rem)',
                                 }}
                                 src={shaunoProfile}
                                 alt="my avatar"
