@@ -65,15 +65,24 @@ const Education = () => {
                     onClick={() => setSlideIndex(index)}
                 >
                     {edu.degree === 'Backend, SQL, and DevOps with Python' ? (
-                        <CardBody
-                            className="d-flex justify-content-center align-items-center"
-                            style={{ height: '100%' }}
-                        >
-                            <img src={edu.image} alt={edu.degree} />
+                        <CardBody className="d-flex justify-content-center align-items-center" style={{padding: '0 .4rem'}}>
+                            <img
+                                src={edu.image}
+                                alt={edu.degree}
+                                style={{
+                                    maxHeight: '100%',
+                                    maxWidth: '100%',
+                                    objectFit: 'cover',
+                                }}
+                            />
                         </CardBody>
                     ) : (
                         <>
-                            <img src={edu.image} alt={edu.degree} />
+                            <img
+                                src={edu.image}
+                                alt={edu.degree}
+                                style={{ maxHeight: '70%' }}
+                            />
                             <CardBody className="d-flex justify-content-center align-items-center">
                                 <CardText
                                     style={{
@@ -105,15 +114,7 @@ const Education = () => {
             }}
             id="education"
         >
-            <Container
-                style={{
-                    display: 'flex',
-                    width: '90%', // take up 90% of parent's width
-                    flex: 1,
-                }}
-            >
-                <Carousel slides={slides} goToSlide={slideIndex} />
-            </Container>
+            <Carousel slides={slides} goToSlide={slideIndex} />
         </Container>
     );
 };
