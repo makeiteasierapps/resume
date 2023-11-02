@@ -80,12 +80,14 @@ const Home = () => {
                         <CardImg
                             style={{
                                 height: 'auto',
-                                width: 'clamp(9.375rem, 23vw, 15.625rem)',
-                                paddingTop: '10px',
+                                width: '13.33rem',
+                                borderRadius: '10%',
+                                padding: '0.9rem 0',
+                                
                             }}
                             src={shaunoProfile}
                             alt="my avatar"
-                            className="rounded-circle img-fluid"
+                            className="img-fluid"
                         />
                     </Col>
                 </Container>
