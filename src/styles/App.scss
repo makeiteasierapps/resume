@@ -1,7 +1,6 @@
-.App {
-  font-family: Arial, sans-serif;
-  color: #333;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.content-container {
+  @media (max-width: 768px) {
+    margin-top: 60px;
+  }
 }
+
