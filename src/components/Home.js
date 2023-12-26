@@ -4,7 +4,7 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import { CardImg } from 'reactstrap';
 import { useSpring, animated } from 'react-spring';
 import '../styles/Home.scss';
-import shaunoProfile from '../assets/shauno_profile.png';
+import shaunoProfile from '../assets/shauno_profile_web.png';
 
 import { useInView } from 'react-intersection-observer';
 
