@@ -1,14 +1,18 @@
 import { useContext } from 'react';
 import { Navbar, Nav, NavItem, NavLink } from 'reactstrap';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faHome,
+    faGraduationCap,
+    faCode,
+    faBriefcase,
+    faEnvelope,
+} from '@fortawesome/free-solid-svg-icons';
 const Header = () => {
     const theme = useContext(ThemeContext);
     return (
-        <Navbar
-            expand="xs"
-            fixed="top"
-            style={{ backgroundColor: 'black' }}
-        >
+        <Navbar expand="xs" fixed="top" style={{ backgroundColor: 'black' }}>
             <Nav
                 style={{
                     display: 'flex',
@@ -16,7 +20,7 @@ const Header = () => {
                     width: '100%',
                     fontFamily: theme.mainText,
                     color: theme.lightBlue,
-                    fontSize: 'clamp(10px, 3vw, 20px)', // change this line
+                    fontSize: 'clamp(25px, 3vw, 30px)',
                 }}
                 navbar
             >
@@ -27,7 +31,7 @@ const Header = () => {
                             color: theme.lightBlue,
                         }}
                     >
-                        HOME
+                        <FontAwesomeIcon id="HomeIcon" icon={faHome} />
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -37,7 +41,7 @@ const Header = () => {
                             color: theme.lightBlue,
                         }}
                     >
-                        EDUCATION
+                        <FontAwesomeIcon icon={faGraduationCap} />
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -47,7 +51,7 @@ const Header = () => {
                             color: theme.lightBlue,
                         }}
                     >
-                        SKILLS
+                        <FontAwesomeIcon icon={faCode} />
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -57,7 +61,7 @@ const Header = () => {
                             color: theme.lightBlue,
                         }}
                     >
-                        PORTFOLIO
+                        <FontAwesomeIcon icon={faBriefcase} />
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -67,7 +71,7 @@ const Header = () => {
                             color: theme.lightBlue,
                         }}
                     >
-                        CONTACT
+                        <FontAwesomeIcon icon={faEnvelope} />
                     </NavLink>
                 </NavItem>
             </Nav>

@@ -65,7 +65,7 @@ const Home = () => {
                                 fontWeight: '500',
                             }}
                         >
-                            Transitioning from fine dining to web development, I
+                            Transitioning from fine dining to tech, I
                             bring a unique blend of creativity, precision, and
                             customer focus to software engineering. My
                             hospitality background has honed my attention to
