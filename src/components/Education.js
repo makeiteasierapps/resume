@@ -1,41 +1,47 @@
 import React, { useState, useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { Container, Card, CardBody, CardText } from 'reactstrap';
-import DevOPs from '../assets/badges/devOps.png';
-import SQL from '../assets/badges/sql.png';
+import DevOPs from '../assets/badges/DevOps_Course_Certificate.png';
+import SQL from '../assets/badges/SQL_and_Data_Modeling_with_Python.png';
 import BackendCert from '../assets/badges/mseDevOps.png';
-import JsFundamentals from '../assets/badges/jsFundamentals.png';
-import PythonFundamentals from '../assets/badges/pythonFundamentals.png';
-import WebFundamentals from '../assets/badges/webFundamentals.png';
+import JsFundamentals from '../assets/badges/JavaScript_Fundamentals.png';
+import PythonFundamentals from '../assets/badges/Data_Structure_and_Algorithms_with_Python.png';
+import WebFundamentals from '../assets/badges/Web-Dev-fundamentals.png';
+import ReactCert from '../assets/badges/React_Course_Certificate.png';
+import ReactNativeCert from '../assets/badges/React_Native.png';
+import FrontEndCert from '../assets/badges/Front_End_Web_and_Mobile_Development.png';
 import Carousel from 'react-spring-3d-carousel';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 
 const education = [
     {
-        degree: 'Backend, SQL, and DevOps with Python',
         image: BackendCert,
     },
     {
-        degree: 'JavaScript Fundamentals',
-        image: JsFundamentals,
+        image: PythonFundamentals,
     },
 
     {
-        degree: 'Python Fundamnetals',
-        image: PythonFundamentals,
+        image: SQL,
     },
     {
-        degree: 'Web Fundamentals',
-        image: WebFundamentals,
-    },
-    {
-        degree: 'DevOPs with Python',
         image: DevOPs,
     },
     {
-        degree: 'SQL with Python',
-        image: SQL,
+        image: FrontEndCert,
+    },
+    {
+        image: WebFundamentals,
+    },
+    {
+        image: JsFundamentals,
+    },
+    {
+        image: ReactCert,
+    },
+    {
+        image: ReactNativeCert,
     },
 ];
 
@@ -53,50 +59,19 @@ const Education = () => {
         key: index,
         content: (
             <animated.div ref={ref} style={props}>
-                <Card
-                    className="text-center"
-                    style={{
-                        backgroundColor: 'white',
-                        color: theme.deepPurple,
-                        width: '30vh',
-                        height: '40vh',
-                        boxShadow: '0px 4px 8px rgba(255, 255, 255, 0.2)',
-                    }}
-                    onClick={() => setSlideIndex(index)}
-                >
-                    {edu.degree === 'Backend, SQL, and DevOps with Python' ? (
-                        <CardBody className="d-flex justify-content-center align-items-center" style={{padding: '0 .4rem'}}>
-                            <img
-                                src={edu.image}
-                                alt={edu.degree}
-                                style={{
-                                    maxHeight: '100%',
-                                    maxWidth: '100%',
-                                    objectFit: 'cover',
-                                }}
-                            />
-                        </CardBody>
-                    ) : (
-                        <>
-                            <img
-                                src={edu.image}
-                                alt={edu.degree}
-                                style={{ maxHeight: '70%' }}
-                            />
-                            <CardBody className="d-flex justify-content-center align-items-center">
-                                <CardText
-                                    style={{
-                                        fontWeight: 'bold',
-                                        fontSize: '3vh',
-                                        fontFamily: theme.mainText,
-                                    }}
-                                >
-                                    {edu.degree}
-                                </CardText>
-                            </CardBody>
-                        </>
-                    )}
-                </Card>
+                <>
+                    <img
+                        src={edu.image}
+                        alt={edu.degree}
+                        onClick={() => setSlideIndex(index)}
+                        style={{
+                            backgroundColor: 'transparent',
+                            color: theme.deepPurple,
+                            width: '30vh',
+                            height: '40vh',
+                        }}
+                    />
+                </>
             </animated.div>
         ),
     }));
