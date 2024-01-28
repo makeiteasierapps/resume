@@ -10,6 +10,7 @@ import WebFundamentals from '../assets/badges/Web-Dev-fundamentals.png';
 import ReactCert from '../assets/badges/React_Course_Certificate.png';
 import ReactNativeCert from '../assets/badges/React_Native.png';
 import FrontEndCert from '../assets/badges/Front_End_Web_and_Mobile_Development.png';
+import NodeCert from '../assets/badges/Backend_with_Node.png'
 import Carousel from 'react-spring-3d-carousel';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
@@ -42,6 +43,9 @@ const education = [
     },
     {
         image: ReactNativeCert,
+    },
+    {
+        image: NodeCert,
     },
 ];
 
