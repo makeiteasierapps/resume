@@ -1,9 +1,13 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { Container, Row, Col } from 'reactstrap';
+import Project from './Project';
 
+import EmailManagerLogo from '../assets/email-manager-logo.jpeg';
+import EmailManagerLogin from '../assets/emailManagerLogin.png';
 const Portfolio = () => {
     const theme = useContext(ThemeContext);
+    const images = [EmailManagerLogo, EmailManagerLogin];
     return (
         <Container
             id="portfolio"
@@ -16,9 +20,14 @@ const Portfolio = () => {
             fluid
         >
             <Row>
-                <Col style={{ fontFamily: theme.oswald }}>
-                    <h2 className="display-4 mb-3">Portfolio</h2>
-                    <p className="lead">Exciting projects coming soon!</p>
+                <Col>
+                    <Project
+                        title="Email Manager"
+                        description="Full Stack Web App utilizing Mailgun and OpenAi API's. Built with React and Node"
+                        images={images}
+                        githubUrl="https://github.com/user/project1"
+                        hostedUrl="https://project1.com"
+                    />
                 </Col>
             </Row>
         </Container>
