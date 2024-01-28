@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { Container, Card, CardBody, CardText } from 'reactstrap';
+import { Container } from 'reactstrap';
 import DevOPs from '../assets/badges/DevOps_Course_Certificate.png';
 import SQL from '../assets/badges/SQL_and_Data_Modeling_with_Python.png';
 import BackendCert from '../assets/badges/mseDevOps.png';
