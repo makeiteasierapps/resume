@@ -21,13 +21,13 @@ const Portfolio = () => {
         >
             <Row>
                 <Col>
-                    <Project
+                    {/* <Project
                         title="Email Manager"
                         description="Full Stack Web App utilizing Mailgun and OpenAi API's. Built with React and Node"
                         images={images}
                         githubUrl="https://github.com/user/project1"
                         hostedUrl="https://project1.com"
-                    />
+                    /> */}
                 </Col>
             </Row>
         </Container>
