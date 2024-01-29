@@ -5,41 +5,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Carousel from 'react-spring-3d-carousel';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-import EmailManagerLogo from '../assets/email-manager-logo.jpeg';
-import EmailManagerLogin from '../assets/emailManagerLogin.png';
 import { ReactComponent as OpenAiLogo } from '../assets/projectIcons/openai-lockup.svg';
 import { ReactComponent as MailgunLogo } from '../assets/projectIcons/mailgun.svg';
 import { ReactComponent as NodeLogo } from '../assets/skillsIcons/node-js.svg';
 import { ReactComponent as FirebaeLogo } from '../assets/projectIcons/firebase.svg';
 import MaterialUiLogo from '../assets/projectIcons/materialUi.png';
-import ReactLogo from '../assets/projectIcons/react.png';
+
+function importAll(r) {
+    return r.keys().map(r);
+}
 
 const Project = () => {
     const theme = useContext(ThemeContext);
     const [slideIndex, setSlideIndex] = useState(0);
-    const images = [
-        {
-            image: EmailManagerLogo,
-            description:
-                "Full Stack Web App utilizing Mailgun and OpenAi API's. Built with React and Node",
-        },
-        {
-            image: EmailManagerLogin,
-            description:
-                'Login page for Email Manager. Built with React and Material UI',
-        },
-        {
-            image: EmailManagerLogin,
-            description:
-                'Login page for Email Manager. Built with React and Material UI',
-        },
-    ];
+    const images = importAll(
+        require.context('../assets/EmailManagerAssest', false, /\.(png|jpe?g|svg)$/)
+    );
 
     const slides = images.map((image, index) => ({
         key: index,
         content: (
             <img
-                src={image.image}
+                src={image}
                 alt={'Email Manager'}
                 style={{
                     backgroundColor: 'transparent',
@@ -61,27 +48,63 @@ const Project = () => {
             }}
         >
             <Row style={{ height: '100%' }}>
-                <Col md="6" style={{ padding: '2rem' }}>
-                    <Row>
+                <Col
+                    md="6"
+                    style={{
+                        padding: '2rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Row style={{ paddingBottom: '1rem' }}>
                         <Col>
-                            <h1>Email Manager</h1>
+                            <h1
+                                style={{
+                                    fontFamily: 'BioRhyme',
+                                    color: '#00D1B5',
+                                }}
+                            >
+                                Email Manager
+                            </h1>
                             <p>
-                                Full Stack Web App utilizing Mailgun and OpenAi
-                                API's. Built with React and Node
+                                Full Stack Web App utilizing Mailgun to send
+                                emails and OpenAi to automatically respond.
                             </p>
                         </Col>
                     </Row>
                     <Row style={{ paddingTop: '1rem' }}>
-                        <Col>
-                            <img
-                                src={ReactLogo}
-                                alt="React"
-                                style={{ width: '8rem' }}
-                            />
+                        <Col
+                            className="d-flex flex-column align-items-center"
+                            style={{ paddingRight: '3rem' }}
+                        >
+                            <Row>
+                                <FontAwesomeIcon
+                                    size="3x"
+                                    icon={faReact}
+                                    style={{
+                                        padding: '5px 0 0 0',
+                                        color: '#61dbfb',
+                                    }}
+                                />
+                                <h3
+                                    className="font-weight-bold"
+                                    style={{
+                                        color: '#61dbfb',
+                                        fontSize: '1.5rem',
+                                    }}
+                                >
+                                    React
+                                </h3>
+                            </Row>
                             <img
                                 src={MaterialUiLogo}
                                 alt="Material UI"
-                                style={{ width: '8rem' }}
+                                style={{
+                                    width: '8.4rem',
+                                    paddingTop: '0.5rem',
+                                }}
                             />
                         </Col>
                         <Col className="d-flex flex-column align-items-center">
@@ -96,7 +119,7 @@ const Project = () => {
                             <Row>
                                 <MailgunLogo
                                     style={{
-                                        width: '6rem',
+                                        width: '6.6rem',
                                         paddingBottom: '1rem',
                                         fill: '#fff',
                                     }}
@@ -105,7 +128,7 @@ const Project = () => {
                             <Row>
                                 <OpenAiLogo
                                     style={{
-                                        width: '6rem',
+                                        width: '6.6rem',
                                         paddingBottom: '1rem',
                                         fill: '#fff',
                                     }}
@@ -114,7 +137,7 @@ const Project = () => {
                             <Row>
                                 <FirebaeLogo
                                     style={{
-                                        width: '6rem',
+                                        width: '6.6rem',
                                         paddingBottom: '1rem',
                                         fill: '#fff',
                                     }}
