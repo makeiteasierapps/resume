@@ -10,7 +10,9 @@ import WebFundamentals from '../assets/badges/Web-Dev-fundamentals.png';
 import ReactCert from '../assets/badges/React_Course_Certificate.png';
 import ReactNativeCert from '../assets/badges/React_Native.png';
 import FrontEndCert from '../assets/badges/Front_End_Web_and_Mobile_Development.png';
-import NodeCert from '../assets/badges/Backend_with_Node.png'
+import NodeCert from '../assets/badges/Backend_with_Node.png';
+import FullstackHonors from '../assets/badges/fullstack_honors.png';
+import FrontendHonors from '../assets/badges/frontend_honors.png';
 import Carousel from 'react-spring-3d-carousel';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
@@ -18,6 +20,9 @@ import { useSpring, animated } from 'react-spring';
 const education = [
     {
         image: BackendCert,
+    },
+    {
+        image: FullstackHonors,
     },
     {
         image: PythonFundamentals,
@@ -46,6 +51,10 @@ const education = [
     },
     {
         image: NodeCert,
+    },
+
+    {
+        image: FrontendHonors,
     },
 ];
 
