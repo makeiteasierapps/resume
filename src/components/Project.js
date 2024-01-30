@@ -11,7 +11,7 @@ import EmailForm from '../assets/EmailManagerAssest/emailform.png';
 import LoginScreen from '../assets/EmailManagerAssest/login.png';
 import ProfileScreen from '../assets/EmailManagerAssest/profile.png';
 import WelcomeScreen from '../assets/EmailManagerAssest/welcome.png';
-import ExtractedData from '../assets/EmailManagerAssest/extracteddata.png';
+import ExtractedData from '../assets/EmailManagerAssest/extractedData.png';
 
 import { ReactComponent as OpenAiLogo } from '../assets/projectIcons/openai-lockup.svg';
 import { ReactComponent as MailgunLogo } from '../assets/projectIcons/mailgun.svg';
