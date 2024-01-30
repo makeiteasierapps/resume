@@ -5,33 +5,69 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Carousel from 'react-spring-3d-carousel';
 import { ThemeContext } from '../contexts/ThemeContext';
 
+import DataDash from '../assets/EmailManagerAssest/datadash.png';
+import EmailManagerLogo from '../assets/EmailManagerAssest/email-manager-logo.jpeg';
+import EmailForm from '../assets/EmailManagerAssest/emailform.png';
+import LoginScreen from '../assets/EmailManagerAssest/login.png';
+import ProfileScreen from '../assets/EmailManagerAssest/profile.png';
+import WelcomeScreen from '../assets/EmailManagerAssest/welcome.png';
+import ExtractedData from '../assets/EmailManagerAssest/extracteddata.png';
+
 import { ReactComponent as OpenAiLogo } from '../assets/projectIcons/openai-lockup.svg';
 import { ReactComponent as MailgunLogo } from '../assets/projectIcons/mailgun.svg';
 import { ReactComponent as NodeLogo } from '../assets/skillsIcons/node-js.svg';
 import { ReactComponent as FirebaeLogo } from '../assets/projectIcons/firebase.svg';
 import MaterialUiLogo from '../assets/projectIcons/materialUi.png';
 
-function importAll(r) {
-    return r.keys().map(r);
-}
+const images = [
+    {
+        image: EmailManagerLogo,
+        description: `Email Manager is a full stack web app hosted serverless with Vercel. 
+        The front end has been built with React and Material-UI while the back end has been done with Node.js. 
+        The project started as an actual solution to a companies problem. 
+        The handling of sending and tracking emails with automated follow ups based on elapsed time. 
+        I then decided to have some fun and implement GPT-4 to automatically respond to email replies. 
+        I have preloaded the AI with context about myself and the project so feel free to ask questions!`,
+    },
+    {
+        image: LoginScreen,
+        description: 'User accounts are managed with Firebase and Firestore',
+    },
+    {
+        image: WelcomeScreen,
+        description: `The first screen shown upon login, gives an overview of the project.`,
+    },
+    {
+        image: ProfileScreen,
+        description: `An option to use your own credentials is provided. Keys are encrypted via symmetric encryption using
+    Google Cloud KMS. Profile data is pulled from the respective oAuth option choosen by the user.`,
+    },
+    {
+        image: EmailForm,
+        description:
+            'Simple form to send email with a predefined template or a custom one',
+    },
+    {
+        image: ExtractedData,
+        description: `Example of data extracted from a .csv and applied to the template. Templates dynamically update to show previews`,
+    },
+    {
+        image: DataDash,
+        description: `The Dashboard shows all emails that have been sent. 
+        It also displays the interactions between the recipient of the email and the AI`,
+    },
+];
 
 const Project = () => {
     const theme = useContext(ThemeContext);
     const [modal, setModal] = useState(false);
     const [slideIndex, setSlideIndex] = useState(0);
-    const images = importAll(
-        require.context(
-            '../assets/EmailManagerAssest',
-            false,
-            /\.(png|jpe?g|svg)$/
-        )
-    );
 
     const slides = images.map((image, index) => ({
         key: index,
         content: (
             <img
-                src={image}
+                src={image.image}
                 alt={'Email Manager'}
                 onClick={() => {
                     if (index === slideIndex) setModal(!modal);
@@ -56,6 +92,12 @@ const Project = () => {
                 backgroundColor: 'transparent',
                 boxShadow: `0 0 13px   ${theme.darkTeal}`,
                 borderRadius: '10px',
+                overflowY: 'auto', // Add this line to make the container scrollable
+                '@media (max-width: 768px)': {
+                    // This will apply the styles inside when the screen width is 768px or less
+                    height: '100vh',
+                    width: '100vw',
+                },
             }}
         >
             <Row style={{ height: '100%' }}>
@@ -120,23 +162,13 @@ const Project = () => {
                                 />
                             </Row>
                             <Row>
-                                <Container className="d-flex flex-column align-items-center" style={{paddingTop: '1rem'}}>
-                                    <FontAwesomeIcon
-                                        icon={faGithub}
-                                        style={{
-                                            color: '#61dbfb',
-                                            fontSize: '3rem',
-                                            cursor: 'pointer',
-                                        }}
-                                        onClick={() =>
-                                            window.open(
-                                                'https://github.com/makeiteasierapps/email-manager-ui',
-                                                '_blank'
-                                            )
-                                        }
-                                    />
-                                    <p>Code</p>
-                                </Container>
+                                <a
+                                    href="https://github.com/makeiteasierapps/email-manager-ui"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Client Code
+                                </a>
                             </Row>
                         </Col>
                         <Col className="d-flex flex-column align-items-center">
@@ -176,28 +208,16 @@ const Project = () => {
                                 />
                             </Row>
                             <Row>
-                                <Container className="d-flex flex-column align-items-center">
-                                    <FontAwesomeIcon
-                                        icon={faGithub}
-                                        style={{
-                                            padding: '5px 0 0 0',
-                                            color: '#61dbfb',
-                                            fontSize: '3rem',
-                                            cursor: 'pointer',
-                                        }}
-                                        onClick={() =>
-                                            window.open(
-                                                'https://github.com/makeiteasierapps/email-manager/tree/main/node_version',
-                                                '_blank'
-                                            )
-                                        }
-                                    />
-                                    <p>Code</p>
-                                </Container>
+                                <a
+                                    href="https://github.com/makeiteasierapps/email-manager/tree/main/node_version"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Server Code
+                                </a>
                             </Row>
                         </Col>
                     </Row>
-
                 </Col>
                 <Col md="6" style={{ padding: '2rem' }}>
                     <Carousel slides={slides} goToSlide={slideIndex} />
@@ -207,14 +227,31 @@ const Project = () => {
             <Modal isOpen={modal} toggle={() => setModal(!modal)}>
                 <ModalBody style={{ backgroundColor: 'black' }}>
                     <img
-                        src={images[slideIndex]}
+                        src={images[slideIndex].image}
                         alt={'Email Manager'}
                         style={{
                             width: '100%',
                             height: 'auto',
+                            padding: '1rem',
+                            borderRadius: '30px',
                         }}
                     />
-                    <p className="text-center">Your description here</p>
+                    <Container
+                        className="d-flex justify-content-center align-items-center"
+                        style={{
+                            boxShadow: `0 0 13px   ${theme.darkTeal}`,
+                            padding: '1rem',
+                            borderRadius: '10px',
+                            width: '80%',
+                        }}
+                    >
+                        <h6
+                            className="d-flex align-items-center text-center"
+                            style={{ color: '#fff', margin: 0 }}
+                        >
+                            {images[slideIndex].description}
+                        </h6>
+                    </Container>
                 </ModalBody>
             </Modal>
         </Container>
