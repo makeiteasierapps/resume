@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
-import { Row, Col, Container } from 'reactstrap';
-import { faReact } from '@fortawesome/free-brands-svg-icons';
+import { Row, Col, Container, Modal, ModalBody, Button } from 'reactstrap';
+import { faReact, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Carousel from 'react-spring-3d-carousel';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -17,9 +17,14 @@ function importAll(r) {
 
 const Project = () => {
     const theme = useContext(ThemeContext);
+    const [modal, setModal] = useState(false);
     const [slideIndex, setSlideIndex] = useState(0);
     const images = importAll(
-        require.context('../assets/EmailManagerAssest', false, /\.(png|jpe?g|svg)$/)
+        require.context(
+            '../assets/EmailManagerAssest',
+            false,
+            /\.(png|jpe?g|svg)$/
+        )
     );
 
     const slides = images.map((image, index) => ({
@@ -28,10 +33,16 @@ const Project = () => {
             <img
                 src={image}
                 alt={'Email Manager'}
+                onClick={() => {
+                    if (index === slideIndex) setModal(!modal);
+                    setSlideIndex(index);
+                }}
                 style={{
-                    backgroundColor: 'transparent',
-                    width: '20vw',
-                    height: '30vh',
+                    backgroundColor: 'black',
+                    width: '10rem',
+                    height: '10rem',
+                    boxShadow: `0 0 6px   ${theme.darkTeal}`,
+                    borderRadius: '7px',
                 }}
             />
         ),
@@ -81,11 +92,11 @@ const Project = () => {
                         >
                             <Row>
                                 <FontAwesomeIcon
-                                    size="3x"
                                     icon={faReact}
                                     style={{
                                         padding: '5px 0 0 0',
                                         color: '#61dbfb',
+                                        fontSize: '3rem',
                                     }}
                                 />
                                 <h3
@@ -98,14 +109,35 @@ const Project = () => {
                                     React
                                 </h3>
                             </Row>
-                            <img
-                                src={MaterialUiLogo}
-                                alt="Material UI"
-                                style={{
-                                    width: '8.4rem',
-                                    paddingTop: '0.5rem',
-                                }}
-                            />
+                            <Row>
+                                <img
+                                    src={MaterialUiLogo}
+                                    alt="Material UI"
+                                    style={{
+                                        width: '8.4rem',
+                                        paddingTop: '0.5rem',
+                                    }}
+                                />
+                            </Row>
+                            <Row>
+                                <Container className="d-flex flex-column align-items-center" style={{paddingTop: '1rem'}}>
+                                    <FontAwesomeIcon
+                                        icon={faGithub}
+                                        style={{
+                                            color: '#61dbfb',
+                                            fontSize: '3rem',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={() =>
+                                            window.open(
+                                                'https://github.com/makeiteasierapps/email-manager-ui',
+                                                '_blank'
+                                            )
+                                        }
+                                    />
+                                    <p>Code</p>
+                                </Container>
+                            </Row>
                         </Col>
                         <Col className="d-flex flex-column align-items-center">
                             <Row>
@@ -143,15 +175,53 @@ const Project = () => {
                                     }}
                                 />
                             </Row>
+                            <Row>
+                                <Container className="d-flex flex-column align-items-center">
+                                    <FontAwesomeIcon
+                                        icon={faGithub}
+                                        style={{
+                                            padding: '5px 0 0 0',
+                                            color: '#61dbfb',
+                                            fontSize: '3rem',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={() =>
+                                            window.open(
+                                                'https://github.com/makeiteasierapps/email-manager/tree/main/node_version',
+                                                '_blank'
+                                            )
+                                        }
+                                    />
+                                    <p>Code</p>
+                                </Container>
+                            </Row>
                         </Col>
                     </Row>
+
                 </Col>
                 <Col md="6" style={{ padding: '2rem' }}>
-                    <Carousel slides={slides} />
+                    <Carousel slides={slides} goToSlide={slideIndex} />
                 </Col>
             </Row>
+
+            <Modal isOpen={modal} toggle={() => setModal(!modal)}>
+                <ModalBody style={{ backgroundColor: 'black' }}>
+                    <img
+                        src={images[slideIndex]}
+                        alt={'Email Manager'}
+                        style={{
+                            width: '100%',
+                            height: 'auto',
+                        }}
+                    />
+                    <p className="text-center">Your description here</p>
+                </ModalBody>
+            </Modal>
         </Container>
     );
 };
 
 export default Project;
+
+{
+}
