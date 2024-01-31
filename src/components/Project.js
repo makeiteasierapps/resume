@@ -97,7 +97,7 @@ const Project = () => {
         <Container
             className="project-main-container"
             style={{
-                boxShadow: `0 0 13px ${theme.darkTeal}`,
+                
             }}
         >
             <Row style={{ height: '100%' }}>
