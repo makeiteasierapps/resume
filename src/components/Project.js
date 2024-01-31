@@ -1,6 +1,15 @@
 import { useState, useContext } from 'react';
-import { Row, Col, Container, Modal, ModalBody, Button } from 'reactstrap';
-import { faReact, faGithub } from '@fortawesome/free-brands-svg-icons';
+import '../styles/Project.scss';
+import {
+    Row,
+    Col,
+    Container,
+    Modal,
+    ModalBody,
+    ModalHeader,
+    Button,
+} from 'reactstrap';
+import { faReact } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Carousel from 'react-spring-3d-carousel';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -86,18 +95,9 @@ const Project = () => {
 
     return (
         <Container
+            className="project-main-container"
             style={{
-                height: '50vh',
-                width: '70vw',
-                backgroundColor: 'transparent',
-                boxShadow: `0 0 13px   ${theme.darkTeal}`,
-                borderRadius: '10px',
-                overflowY: 'auto', // Add this line to make the container scrollable
-                '@media (max-width: 768px)': {
-                    // This will apply the styles inside when the screen width is 768px or less
-                    height: '100vh',
-                    width: '100vw',
-                },
+                boxShadow: `0 0 13px ${theme.darkTeal}`,
             }}
         >
             <Row style={{ height: '100%' }}>
@@ -128,10 +128,7 @@ const Project = () => {
                         </Col>
                     </Row>
                     <Row style={{ paddingTop: '1rem' }}>
-                        <Col
-                            className="d-flex flex-column align-items-center"
-                            style={{ paddingRight: '3rem' }}
-                        >
+                        <Col className="d-flex flex-column align-items-center ">
                             <Row>
                                 <FontAwesomeIcon
                                     icon={faReact}
@@ -219,36 +216,36 @@ const Project = () => {
                         </Col>
                     </Row>
                 </Col>
-                <Col md="6" style={{ padding: '2rem' }}>
-                    <Carousel slides={slides} goToSlide={slideIndex} />
+                <Col md="6" style={{ padding: '2rem', minHeight: '300px' }}>
+                    <Carousel
+                        slides={slides}
+                        goToSlide={slideIndex}
+                        style={{ width: '80%' }}
+                    />
                 </Col>
             </Row>
 
             <Modal isOpen={modal} toggle={() => setModal(!modal)}>
-                <ModalBody style={{ backgroundColor: 'black' }}>
-                    <img
-                        src={images[slideIndex].image}
-                        alt={'Email Manager'}
+                <ModalHeader>
+                    <Button
+                        close
+                        onClick={() => setModal(!modal)}
                         style={{
-                            width: '100%',
-                            height: 'auto',
-                            padding: '1rem',
-                            borderRadius: '30px',
+                            backgroundColor: theme.darkTeal,
+                            borderColor: 'white',
+                            margin: '0.5rem',
                         }}
                     />
+                </ModalHeader>
+                <ModalBody>
+                    <img src={images[slideIndex].image} alt={'Email Manager'} />
                     <Container
-                        className="d-flex justify-content-center align-items-center"
+                        className="description-container"
                         style={{
                             boxShadow: `0 0 13px   ${theme.darkTeal}`,
-                            padding: '1rem',
-                            borderRadius: '10px',
-                            width: '80%',
                         }}
                     >
-                        <h6
-                            className="d-flex align-items-center text-center"
-                            style={{ color: '#fff', margin: 0 }}
-                        >
+                        <h6 className="d-flex align-items-center text-center">
                             {images[slideIndex].description}
                         </h6>
                     </Container>
@@ -259,6 +256,3 @@ const Project = () => {
 };
 
 export default Project;
-
-{
-}

@@ -57,7 +57,7 @@ const Home = () => {
                                 fontStyle: 'italic',
                             }}
                         >
-                            Software Engineer
+                            Aspiring Software Engineer
                         </Container>
                         <Container
                             className="responsive-text"
