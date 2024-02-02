@@ -1,67 +1,12 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import '../styles/Project.scss';
 import { Row, Col, Container } from 'reactstrap';
-import { faReact } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Carousel from 'react-spring-3d-carousel';
 import { ThemeContext } from '../contexts/ThemeContext';
-
-import DataDash from '../assets/EmailManagerAssest/datadash.png';
-import EmailManagerLogo from '../assets/EmailManagerAssest/email-manager-logo.jpeg';
-import EmailForm from '../assets/EmailManagerAssest/emailform.png';
-import LoginScreen from '../assets/EmailManagerAssest/login.png';
-import ProfileScreen from '../assets/EmailManagerAssest/profile.png';
-import WelcomeScreen from '../assets/EmailManagerAssest/welcome.png';
-import ExtractedData from '../assets/EmailManagerAssest/extractedData.png';
-
-import { ReactComponent as OpenAiLogo } from '../assets/projectIcons/openai-lockup.svg';
-import { ReactComponent as MailgunLogo } from '../assets/projectIcons/mailgun.svg';
-import { ReactComponent as NodeLogo } from '../assets/skillsIcons/node-js.svg';
-import { ReactComponent as FirebaeLogo } from '../assets/projectIcons/firebase.svg';
-import MaterialUiLogo from '../assets/projectIcons/materialUi.png';
-
 import ProjectModal from './ProjectModal';
 
-const images = [
-    {
-        image: EmailManagerLogo,
-        description: `Email Manager is a full stack web app hosted serverless with Vercel. 
-        The front end has been built with React and Material-UI while the back end has been done with Node.js. 
-        The project started as an actual solution to a companies problem. 
-        The handling of sending and tracking emails with automated follow ups based on elapsed time. 
-        I then decided to have some fun and implement GPT-4 to automatically respond to email replies. 
-        I have preloaded the AI with context about myself and the project so feel free to ask questions!`,
-    },
-    {
-        image: LoginScreen,
-        description: 'User accounts are managed with Firebase and Firestore',
-    },
-    {
-        image: WelcomeScreen,
-        description: `The first screen shown upon login, gives an overview of the project.`,
-    },
-    {
-        image: ProfileScreen,
-        description: `An option to use your own credentials is provided. Keys are encrypted via symmetric encryption using
-    Google Cloud KMS. Profile data is pulled from the respective oAuth option choosen by the user.`,
-    },
-    {
-        image: EmailForm,
-        description:
-            'Simple form to send email with a predefined template or a custom one',
-    },
-    {
-        image: ExtractedData,
-        description: `Example of data extracted from a .csv and applied to the template. Templates dynamically update to show previews`,
-    },
-    {
-        image: DataDash,
-        description: `The Dashboard shows all emails that have been sent. 
-        It also displays the interactions between the recipient of the email and the AI`,
-    },
-];
-
-const Project = () => {
+const Project = ({ clientTech, serverTech, ProjectDetails, images }) => {
     const theme = useContext(ThemeContext);
     const [modal, setModal] = useState(false);
     const [slideIndex, setSlideIndex] = useState(0);
@@ -88,7 +33,7 @@ const Project = () => {
     }));
 
     return (
-        <Container className="project-main-container" style={{}}>
+        <Container className="project-main-container">
             <Row style={{ height: '100%' }}>
                 <Col
                     md="6"
@@ -104,52 +49,44 @@ const Project = () => {
                         <Col>
                             <h1
                                 style={{
-                                    fontFamily: 'BioRhyme',
-                                    color: '#00D1B5',
+                                    fontFamily: ProjectDetails.font,
+                                    color: ProjectDetails.fontColor,
                                 }}
                             >
-                                Email Manager
+                                {ProjectDetails.title}
                             </h1>
-                            <p>
-                                Full Stack Web App utilizing Mailgun to send
-                                emails and OpenAi to automatically respond.
-                            </p>
+                            <p>{ProjectDetails.description}</p>
                         </Col>
                     </Row>
                     <Row style={{ paddingTop: '1rem' }}>
                         <Col className="d-flex flex-column align-items-center ">
-                            <Row>
-                                <FontAwesomeIcon
-                                    icon={faReact}
-                                    style={{
-                                        padding: '5px 0 0 0',
-                                        color: '#61dbfb',
-                                        fontSize: '3rem',
-                                    }}
-                                />
-                                <h3
-                                    className="font-weight-bold"
-                                    style={{
-                                        color: '#61dbfb',
-                                        fontSize: '1.5rem',
-                                    }}
-                                >
-                                    React
-                                </h3>
-                            </Row>
-                            <Row>
-                                <img
-                                    src={MaterialUiLogo}
-                                    alt="Material UI"
-                                    style={{
-                                        width: '8.4rem',
-                                        paddingTop: '0.5rem',
-                                    }}
-                                />
-                            </Row>
+                            {clientTech.map((tech) => (
+                                <Row key={tech.name}>
+                                    {tech.logo &&
+                                    typeof tech.logo === 'object' ? (
+                                        <FontAwesomeIcon
+                                            icon={tech.logo}
+                                            style={{
+                                                padding: '5px 0 0 0',
+                                                color: '#61dbfb',
+                                                fontSize: '3rem',
+                                            }}
+                                        />
+                                    ) : (
+                                        <img
+                                            src={tech.logo}
+                                            alt={tech.name}
+                                            style={{
+                                                width: '8.4rem',
+                                                padding: '0.5rem',
+                                            }}
+                                        />
+                                    )}
+                                </Row>
+                            ))}
                             <Row>
                                 <a
-                                    href="https://github.com/makeiteasierapps/email-manager-ui"
+                                    href={ProjectDetails.clientCode}
                                     target="_blank"
                                     rel="noreferrer"
                                 >
@@ -158,44 +95,20 @@ const Project = () => {
                             </Row>
                         </Col>
                         <Col className="d-flex flex-column align-items-center">
-                            <Row>
-                                <NodeLogo
-                                    style={{
-                                        width: '8rem',
-                                        paddingBottom: '1.4rem',
-                                    }}
-                                />
-                            </Row>
-                            <Row>
-                                <MailgunLogo
-                                    style={{
-                                        width: '6.6rem',
-                                        paddingBottom: '1rem',
-                                        fill: '#fff',
-                                    }}
-                                />
-                            </Row>
-                            <Row>
-                                <OpenAiLogo
-                                    style={{
-                                        width: '6.6rem',
-                                        paddingBottom: '1rem',
-                                        fill: '#fff',
-                                    }}
-                                />
-                            </Row>
-                            <Row>
-                                <FirebaeLogo
-                                    style={{
-                                        width: '6.6rem',
-                                        paddingBottom: '1rem',
-                                        fill: '#fff',
-                                    }}
-                                />
-                            </Row>
+                            {serverTech.map((tech) => (
+                                <Row key={tech.name}>
+                                    {React.createElement(tech.logo, {
+                                        style: {
+                                            width: '6.6rem',
+                                            paddingBottom: '1rem',
+                                            fill: '#fff',
+                                        },
+                                    })}
+                                </Row>
+                            ))}
                             <Row>
                                 <a
-                                    href="https://github.com/makeiteasierapps/email-manager/tree/main/node_version"
+                                    href={ProjectDetails.serverCode}
                                     target="_blank"
                                     rel="noreferrer"
                                 >

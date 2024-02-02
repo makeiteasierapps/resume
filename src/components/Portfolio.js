@@ -1,8 +1,10 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { Container, Row, Col } from 'reactstrap';
+import { EmailManagerData } from '../assets/EmailManagerAssest/Data';
 import Project from './Project';
 
+const { clientTech, serverTech, ProjectDetails, images } = EmailManagerData;
 const Portfolio = () => {
     const theme = useContext(ThemeContext);
     return (
@@ -18,7 +20,12 @@ const Portfolio = () => {
         >
             <Row>
                 <Col>
-                    <Project />
+                    <Project
+                        clientTech={clientTech}
+                        serverTech={serverTech}
+                        ProjectDetails={ProjectDetails}
+                        images={images}
+                    />
                 </Col>
             </Row>
         </Container>
