@@ -1,14 +1,6 @@
 import { useState, useContext } from 'react';
 import '../styles/Project.scss';
-import {
-    Row,
-    Col,
-    Container,
-    Modal,
-    ModalBody,
-    ModalHeader,
-    Button,
-} from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 import { faReact } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Carousel from 'react-spring-3d-carousel';
@@ -27,6 +19,8 @@ import { ReactComponent as MailgunLogo } from '../assets/projectIcons/mailgun.sv
 import { ReactComponent as NodeLogo } from '../assets/skillsIcons/node-js.svg';
 import { ReactComponent as FirebaeLogo } from '../assets/projectIcons/firebase.svg';
 import MaterialUiLogo from '../assets/projectIcons/materialUi.png';
+
+import ProjectModal from './ProjectModal';
 
 const images = [
     {
@@ -94,12 +88,7 @@ const Project = () => {
     }));
 
     return (
-        <Container
-            className="project-main-container"
-            style={{
-                
-            }}
-        >
+        <Container className="project-main-container" style={{}}>
             <Row style={{ height: '100%' }}>
                 <Col
                     md="6"
@@ -224,33 +213,12 @@ const Project = () => {
                     />
                 </Col>
             </Row>
-
-            <Modal isOpen={modal} toggle={() => setModal(!modal)}>
-                <ModalHeader>
-                    <Button
-                        close
-                        onClick={() => setModal(!modal)}
-                        style={{
-                            backgroundColor: theme.darkTeal,
-                            borderColor: 'white',
-                            margin: '0.5rem',
-                        }}
-                    />
-                </ModalHeader>
-                <ModalBody>
-                    <img src={images[slideIndex].image} alt={'Email Manager'} />
-                    <Container
-                        className="description-container"
-                        style={{
-                            boxShadow: `0 0 13px   ${theme.darkTeal}`,
-                        }}
-                    >
-                        <h6 className="d-flex align-items-center text-center">
-                            {images[slideIndex].description}
-                        </h6>
-                    </Container>
-                </ModalBody>
-            </Modal>
+            <ProjectModal
+                images={images}
+                modal={modal}
+                setModal={setModal}
+                slideIndex={slideIndex}
+            />
         </Container>
     );
 };
