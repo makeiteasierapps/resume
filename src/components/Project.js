@@ -93,21 +93,30 @@ const Project = ({ clientTech, serverTech, ProjectDetails, images }) => {
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    Client Code
+                                    {ProjectDetails.serverCode
+                                        ? 'Client Code'
+                                        : null}
                                 </a>
                             </Row>
                         </Col>
                         <Col className="d-flex flex-column align-items-center">
                             {serverTech.map((tech) => (
                                 <Row key={tech.name}>
-                                    {tech.logo &&
-                                        React.createElement(tech.logo, {
-                                            style: {
-                                                width: '6.6rem',
-                                                paddingBottom: '1rem',
-                                                fill: '#fff',
-                                            },
-                                        })}
+                                    {tech.logo ? (
+                                        typeof tech.logo === 'string' ? (
+                                            <p style={{ whiteSpace: 'nowrap' }}>
+                                                {tech.logo}
+                                            </p>
+                                        ) : (
+                                            React.createElement(tech.logo, {
+                                                style: {
+                                                    width: '6.6rem',
+                                                    paddingBottom: '1rem',
+                                                    fill: '#fff',
+                                                },
+                                            })
+                                        )
+                                    ) : null}
                                 </Row>
                             ))}
                             <Row>
@@ -116,7 +125,9 @@ const Project = ({ clientTech, serverTech, ProjectDetails, images }) => {
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    Server Code
+                                    {ProjectDetails.serverCode
+                                        ? 'Server Code'
+                                        : null}
                                 </a>
                             </Row>
                         </Col>
