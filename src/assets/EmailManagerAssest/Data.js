@@ -6,6 +6,15 @@ import ProfileScreen from '../EmailManagerAssest/profile.png';
 import WelcomeScreen from '../EmailManagerAssest/welcome.png';
 import ExtractedData from '../EmailManagerAssest/extractedData.png';
 
+import PaxxiumLogin from '../PaxxiumAssets/login.png';
+import HomeScreen from '../PaxxiumAssets/home.png';
+import ChatScreen from '../PaxxiumAssets/chat.png';
+import ChatSettings from '../PaxxiumAssets/chatsettings.png';
+import PaxxiumSignup from '../PaxxiumAssets/signup.png';
+import MinNavbar from '../PaxxiumAssets/navbarMinimized.png';
+import ExpandedNav from '../PaxxiumAssets/navbarExpanded.png';
+import DalleScreen from '../PaxxiumAssets/dalle.png';
+
 import { ReactComponent as OpenAiLogo } from '../projectIcons/openai-lockup.svg';
 import { ReactComponent as MailgunLogo } from '../projectIcons/mailgun.svg';
 import { ReactComponent as NodeLogo } from '../skillsIcons/node-js.svg';
@@ -26,7 +35,8 @@ export const EmailManagerData = {
         },
         {
             image: LoginScreen,
-            description: 'User accounts are managed with Firebase and Firestore',
+            description:
+                'User accounts are managed with Firebase and Firestore',
         },
         {
             image: WelcomeScreen,
@@ -71,5 +81,62 @@ export const EmailManagerData = {
         clientCode: 'https://github.com/makeiteasierapps/email-manager-ui',
         serverCode:
             'https://github.com/makeiteasierapps/email-manager/tree/main/node_version',
+    },
+};
+
+export const PaxxiumData = {
+    images: [
+        {
+            image: PaxxiumLogin,
+            description: `Login Screen`,
+        },
+        {
+            image: PaxxiumSignup,
+            description: `Signup Screen`,
+        },
+        {
+            image: HomeScreen,
+            description: `Home Screen`,
+        },
+        {
+            image: ChatScreen,
+            description: `Chat Screen`,
+        },
+        {
+            image: ChatSettings,
+            description: `Chat Settings`,
+        },
+        {
+            image: MinNavbar,
+            description: `Minimized Navbar`,
+        },
+        {
+            image: ExpandedNav,
+            description: `Expanded Navbar`,
+        },
+        {
+            image: DalleScreen,
+            description: `Dalle Screen`,
+        },
+    ],
+    clientTech: [
+        { name: 'React', logo: faReact },
+        { name: 'Material UI', logo: MaterialUiLogo },
+    ],
+    serverTech: [
+        { name: 'Python', logo: null },
+        { name: 'Flask', logo: null },
+        { name: 'OpenAI', logo: OpenAiLogo },
+        { name: 'Firebase', logo: FirebaeLogo },
+        { name: 'Langchain', logo: null },
+    ],
+    ProjectDetails: {
+        font: 'BioRhyme',
+        fontColor: '#00D1B5',
+        title: 'Paxxium',
+        description: `An AI interface built with Langchain and OpenAI, built to give the user more control
+        over how they interact with their AI.`,
+        clientCode: null,
+        serverCode: null,
     },
 };

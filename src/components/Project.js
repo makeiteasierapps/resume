@@ -33,7 +33,10 @@ const Project = ({ clientTech, serverTech, ProjectDetails, images }) => {
     }));
 
     return (
-        <Container className="project-main-container">
+        <Container
+            className="project-main-container"
+            style={{ height: '60vh', width: '80vw' }}
+        >
             <Row style={{ height: '100%' }}>
                 <Col
                     md="6"
@@ -97,13 +100,14 @@ const Project = ({ clientTech, serverTech, ProjectDetails, images }) => {
                         <Col className="d-flex flex-column align-items-center">
                             {serverTech.map((tech) => (
                                 <Row key={tech.name}>
-                                    {React.createElement(tech.logo, {
-                                        style: {
-                                            width: '6.6rem',
-                                            paddingBottom: '1rem',
-                                            fill: '#fff',
-                                        },
-                                    })}
+                                    {tech.logo &&
+                                        React.createElement(tech.logo, {
+                                            style: {
+                                                width: '6.6rem',
+                                                paddingBottom: '1rem',
+                                                fill: '#fff',
+                                            },
+                                        })}
                                 </Row>
                             ))}
                             <Row>
