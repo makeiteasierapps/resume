@@ -15,6 +15,37 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
     const [activeSection, setActiveSection] = useState('home');
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const ids = ['home', 'education', 'skills', 'portfolio', 'contact'];
+            let currentSection = 'home';
+
+            ids.forEach((id) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    const isVisible =
+                        rect.top < window.innerHeight && rect.bottom >= 0;
+                    if (isVisible) {
+                        currentSection = id;
+                    }
+                }
+            });
+
+            setActiveSection(currentSection);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        console.log(activeSection);
+    }, [activeSection]);
+
     const getIconColor = () => {
         switch (activeSection) {
             case 'home':
