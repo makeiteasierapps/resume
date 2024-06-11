@@ -9,6 +9,7 @@ const Footer = () => {
         <Container
             fluid
             tag="footer"
+            id="footer"
             className="text-center py-3 border-top"
             style={{ backgroundColor: 'black', color: theme.lightBlue }}
         >

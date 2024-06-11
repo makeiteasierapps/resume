@@ -8,16 +8,25 @@ import ContactMe from './components/ContactMe';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Chat from './components/chat/Chat';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import './styles/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
     const [activeSection, setActiveSection] = useState('home');
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            const ids = ['home', 'education', 'skills', 'portfolio', 'contact'];
+            const ids = [
+                'home',
+                'education',
+                'skills',
+                'portfolio',
+                'contact',
+                'footer',
+            ];
             let currentSection = 'home';
 
             ids.forEach((id) => {
@@ -58,6 +67,8 @@ const App = () => {
                 return '#fff';
             case 'contact':
                 return '#000';
+            case 'footer':
+                return '#fff';
             default:
                 return '#000';
         }
@@ -65,25 +76,30 @@ const App = () => {
 
     return (
         <ThemeContext.Provider value={ThemeContext._currentValue}>
-            <div className="content-container">
-                <NavBar />
-                <Home />
-                <Education />
-                <Skills />
-                <Portfolio />
-                <ContactMe />
-                <Footer />
-                <FontAwesomeIcon
-                    icon={faComments}
-                    style={{
-                        position: 'fixed',
-                        bottom: '20px',
-                        right: '20px',
-                        fontSize: '2rem',
-                        color: getIconColor(),
-                    }}
-                />
-            </div>
+            <>
+                <div className="content-container">
+                    <NavBar />
+                    <Home />
+                    <Education />
+                    <Skills />
+                    <Portfolio />
+                    <ContactMe />
+                    <Footer />
+                    <FontAwesomeIcon
+                        icon={faComments}
+                        style={{
+                            position: 'fixed',
+                            bottom: '20px',
+                            right: '20px',
+                            fontSize: '2rem',
+                            color: getIconColor(),
+                            cursor: 'pointer',
+                        }}
+                        onClick={() => setIsChatOpen(!isChatOpen)}
+                    />
+                </div>
+                {isChatOpen && <Chat chatId={1} />}
+            </>
         </ThemeContext.Provider>
     );
 };
