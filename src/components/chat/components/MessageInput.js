@@ -56,7 +56,7 @@ const MessageInput = () => {
                     style={{ border: 'none' }}
                     disabled={!input}
                     onClick={() => {
-                        sendMessage(input);
+                        sendMessage(1, input);
                         setInput('');
                     }}
                 >

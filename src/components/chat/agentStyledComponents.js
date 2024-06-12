@@ -79,7 +79,9 @@ export const MessagesContainer = styled.div`
     white-space: pre-line;
 `;
 
-export const MessageContainer = styled(ListGroupItem)`
+export const MessageContainer = styled(ListGroupItem).withConfig({
+    shouldForwardProp: (prop) => prop !== 'messageFrom',
+})`
     background-color: ${({ messageFrom }) =>
         messageFrom === 'user' ? 'lightgray' : 'white'};
     word-break: break-word;
@@ -130,7 +132,6 @@ export const StyledIconButton = styled(Button)`
 `;
 
 export const CloseIconButton = styled(Button)`
-    
     padding: 1px;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.43);
     color: black;

@@ -14,7 +14,7 @@ const AgentMessage = ({ message }) => {
                     fontSize: '36px',
                     position: 'relative',
                     marginRight: '13px',
-                    color: theme.palette.text.secondary,
+                    color: 'gray',
                 }}
             />
 

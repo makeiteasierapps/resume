@@ -1,5 +1,4 @@
 import { useState, useRef, useContext, useEffect } from 'react';
-import axios from 'axios';
 import { SnackbarContext } from '../../contexts/SnackbarContext';
 import { processToken } from './utils/processToken';
 
@@ -13,17 +12,16 @@ export const useChatManager = () => {
     const languageRef = useRef(null);
     const [isChatOpen, setIsChatOpen] = useState(false);
 
-    const BACKEND_URL = process.env.BACKEND_URL;
-    const BACKEND_URL_PROD = process.env.BACKEND_URL_PROD;
-    const API_KEY = process.env.API_KEY;
-    const chatUrl =
-        process.env.LOCAL_DEV === 'True'
-            ? `${BACKEND_URL}:30000`
-            : BACKEND_URL_PROD;
+    const BACKEND_URL_PROD = process.env.REACT_APP_BACKEND_URL_PROD;
+    const API_KEY = process.env.REACT_APP_API_KEY;
 
     useEffect(() => {
         setIsLoading(true);
     }, []);
+
+    const getMessages = (chatId) => {
+        return messages[chatId] || [];
+    };
 
     const addMessage = async (chatId, newMessage) => {
         setMessages((prevMessageParts) => {
@@ -45,8 +43,14 @@ export const useChatManager = () => {
         };
         addMessage(chatId, userMessage);
 
+        const chatHistory = await getMessages(chatId);
+
         try {
-            const response = await sendUserMessage(chatId, userMessage);
+            const response = await sendUserMessage(
+                chatId,
+                userMessage,
+                chatHistory
+            );
             await handleStreamingResponse(response, chatId);
         } catch (error) {
             console.error(error);
@@ -54,21 +58,24 @@ export const useChatManager = () => {
         }
     };
 
-    // using fetch instead of axios because axios doesn't support streaming
     const sendUserMessage = async (chatId, userMessage, chatHistory) => {
-        const response = await fetch(`${chatUrl}/chatMobile/messages`, {
-            reactNative: { textStreaming: true },
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-Key': API_KEY,
-            },
-            body: JSON.stringify({
-                chatId,
-                userMessage,
-                chatHistory,
-            }),
-        });
+        const response = await fetch(
+            `http://127.0.0.1:30000/chatMobile/messages`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY,
+                },
+                body: JSON.stringify({
+                    chatId: chatId,
+                    chatHistory: chatHistory,
+                    userMessage: userMessage,
+                    saveToDb: false,
+                    createVectorPipeline: false,
+                }),
+            }
+        );
 
         if (!response.ok) {
             throw new Error('Failed to send message');
@@ -85,6 +92,7 @@ export const useChatManager = () => {
                 break;
             }
             const decodedValue = new TextDecoder('utf-8').decode(value);
+            console.log(decodedValue);
             const jsonChunks = decodedValue
                 .split('\n')
                 .filter((line) => line.trim() !== '');
