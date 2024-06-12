@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from './contexts/ThemeContext';
 import NavBar from './components/Header';
 import Skills from './components/Skills';
@@ -9,13 +9,14 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Chat from './components/chat/Chat';
+import { ChatContext } from './contexts/ChatContext';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import './styles/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
     const [activeSection, setActiveSection] = useState('home');
-    const [isChatOpen, setIsChatOpen] = useState(false);
+    const { isChatOpen, setIsChatOpen } = useContext(ChatContext);
 
     useEffect(() => {
         const handleScroll = () => {

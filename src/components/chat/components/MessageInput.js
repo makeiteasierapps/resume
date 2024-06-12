@@ -24,10 +24,9 @@ const StyledInput = styled(Input)`
     }
 `;
 
-const MessageInput = ({ chatSettings }) => {
+const MessageInput = () => {
     const { sendMessage } = useContext(ChatContext);
     const [input, setInput] = useState('');
-    const [isFocused, setIsFocused] = useState(false);
 
     return (
         <InputArea>
@@ -39,8 +38,6 @@ const MessageInput = ({ chatSettings }) => {
                     value={input}
                     es
                     onChange={(event) => setInput(event.target.value)}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => setIsFocused(false)}
                     onKeyDown={(event) => {
                         if (
                             event.key === 'Enter' &&
@@ -48,7 +45,7 @@ const MessageInput = ({ chatSettings }) => {
                             input.trim() !== ''
                         ) {
                             event.preventDefault();
-                            sendMessage(input, chatSettings);
+                            sendMessage(input);
                             setInput('');
                         }
                     }}
@@ -59,7 +56,7 @@ const MessageInput = ({ chatSettings }) => {
                     style={{ border: 'none' }}
                     disabled={!input}
                     onClick={() => {
-                        sendMessage(input, chatSettings);
+                        sendMessage(input);
                         setInput('');
                     }}
                 >

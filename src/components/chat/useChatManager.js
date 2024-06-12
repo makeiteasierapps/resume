@@ -3,7 +3,6 @@ import axios from 'axios';
 import { SnackbarContext } from '../../contexts/SnackbarContext';
 import { processToken } from './utils/processToken';
 
-
 export const useChatManager = () => {
     const { showSnackbar } = useContext(SnackbarContext);
     const [chatArray, setChatArray] = useState([]);
@@ -12,6 +11,7 @@ export const useChatManager = () => {
     const [insideCodeBlock, setInsideCodeBlock] = useState(false);
     const ignoreNextTokenRef = useRef(false);
     const languageRef = useRef(null);
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     const BACKEND_URL = process.env.BACKEND_URL;
     const BACKEND_URL_PROD = process.env.BACKEND_URL_PROD;
@@ -149,18 +149,6 @@ export const useChatManager = () => {
 
     const clearChat = async (chatId) => {
         try {
-            const response = await axios.delete(
-                `${chatUrl}/chatMobile/messages`,
-                {
-                    data: { chatId },
-                    headers: {
-                        'X-API-Key': API_KEY,
-                    },
-                }
-            );
-
-            if (!response.ok) throw new Error('Failed to clear messages');
-
             // Update the chatArray state
             setChatArray((prevChatArray) => {
                 const updatedChatArray = prevChatArray.map((chat) => {
@@ -192,82 +180,14 @@ export const useChatManager = () => {
         }
     };
 
-    const deleteChat = async (chatId) => {
-        try {
-            const response = await axios.delete(`${chatUrl}/chatMobile`, {
-                data: { chatId },
-                headers: {
-                    'X-API-Key': API_KEY,
-                },
-            });
-            if (response.status !== 200)
-                throw new Error('Failed to delete conversation');
-            setChatArray((prevChatArray) => {
-                const updatedChatArray = prevChatArray.filter(
-                    (chatObj) => chatObj.chatId !== chatId
-                );
-                localStorage.setItem(
-                    'chatArray',
-                    JSON.stringify(updatedChatArray)
-                );
-                return updatedChatArray;
-            });
-            setMessages((prevMessages) => {
-                const updatedMessages = { ...prevMessages };
-                delete updatedMessages[chatId];
-                localStorage.setItem(
-                    'messages',
-                    JSON.stringify(updatedMessages)
-                );
-                return updatedMessages;
-            });
-        } catch (error) {
-            console.error(error);
-            showSnackbar(`Network or fetch error: ${error.message}`, 'error');
-        }
-    };
-
-    const createChat = async (model, chatName, userId) => {
-        try {
-            const response = await axios.post(
-                `${chatUrl}/chatMobile`,
-                {
-                    model,
-                    chatName,
-                    userId,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-API-Key': API_KEY,
-                    },
-                }
-            );
-            if (response.status !== 200)
-                throw new Error('Failed to create chat');
-            const data = await response.data;
-            // Update the chatArray directly here
-            setChatArray((prevChats) => {
-                const updatedChatArray = [data, ...prevChats];
-                localStorage.setItem(
-                    'chatArray',
-                    JSON.stringify(updatedChatArray)
-                );
-                return updatedChatArray;
-            });
-        } catch (error) {
-            console.error(error);
-            showSnackbar(`Network or fetch error: ${error.message}`, 'error');
-        }
-    };
     return {
         chatArray,
+        isChatOpen,
+        setIsChatOpen,
         messages,
         isLoading,
         addMessage,
         sendMessage,
         clearChat,
-        deleteChat,
-        createChat,
     };
 };
