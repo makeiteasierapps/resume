@@ -130,7 +130,7 @@ export const StyledIconButton = styled(Button)`
 `;
 
 export const CloseIconButton = styled(Button)`
-    transform: translate(-60%, -90%);
+    
     padding: 1px;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.43);
     color: black;

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Input, InputGroup, InputGroupText, Button } from 'reactstrap';
+import { Input, InputGroup, Button } from 'reactstrap';
 import { ChatContext } from '../../../contexts/ChatContext';
 import { InputArea } from '../agentStyledComponents';
 import { FaPaperPlane } from 'react-icons/fa';
@@ -14,16 +14,14 @@ const StyledInputGroup = styled(InputGroup)`
     border-radius: 4px;
 `;
 
-const StyledInputLabel = styled.label`
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    visibility: ${({ isFocused, userMessage }) =>
-        isFocused || userMessage ? 'hidden' : 'visible'};
-    transform: translateY(-50%);
-    background-color: white;
-    padding-left: 5px;
-    padding-right: 5px;
+const StyledInput = styled(Input)`
+    border: none;
+    resize: none;
+    height: 100%;
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
 `;
 
 const MessageInput = ({ chatSettings }) => {
@@ -34,12 +32,12 @@ const MessageInput = ({ chatSettings }) => {
     return (
         <InputArea>
             <StyledInputGroup>
-                <StyledInputLabel isFocused={isFocused} userMessage={input}>
-                    Type Something
-                </StyledInputLabel>
-                <Input
+                <StyledInput
                     type="textarea"
+                    placeholder="Type a message..."
+                    style={{ border: 'none', resize: 'none', height: '100%' }}
                     value={input}
+                    es
                     onChange={(event) => setInput(event.target.value)}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
@@ -55,18 +53,18 @@ const MessageInput = ({ chatSettings }) => {
                         }
                     }}
                 />
-                <InputGroupText addonType="append">
-                    <Button
-                        color="primary"
-                        disabled={!input}
-                        onClick={() => {
-                            sendMessage(input, chatSettings);
-                            setInput('');
-                        }}
-                    >
-                        <FaPaperPlane />
-                    </Button>
-                </InputGroupText>
+
+                <Button
+                    color="transparent"
+                    style={{ border: 'none' }}
+                    disabled={!input}
+                    onClick={() => {
+                        sendMessage(input, chatSettings);
+                        setInput('');
+                    }}
+                >
+                    <FaPaperPlane />
+                </Button>
             </StyledInputGroup>
         </InputArea>
     );
