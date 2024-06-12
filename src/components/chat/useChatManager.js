@@ -4,7 +4,6 @@ import { processToken } from './utils/processToken';
 
 export const useChatManager = () => {
     const { showSnackbar } = useContext(SnackbarContext);
-    const [chatArray, setChatArray] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState({});
     const [insideCodeBlock, setInsideCodeBlock] = useState(false);
@@ -27,7 +26,6 @@ export const useChatManager = () => {
         try {
             const localMessages = JSON.parse(localStorage.getItem('messages'));
             if (localMessages) {
-                // get messages for given id
                 setMessages(localMessages);
             }
         } catch (error) {
@@ -161,7 +159,6 @@ export const useChatManager = () => {
     };
 
     return {
-        chatArray,
         isChatOpen,
         setIsChatOpen,
         messages,
