@@ -62,7 +62,7 @@ const ChatBar = ({ chatName, chatId }) => {
                     <StyledIconButton
                         id="clearChatButton"
                         aria-label="clear_chat"
-                        onClick={() => clearChat(chatId)}
+                        onClick={() => clearChat()}
                     >
                         <FaCommentSlash />
                     </StyledIconButton>

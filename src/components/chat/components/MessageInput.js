@@ -36,7 +36,6 @@ const MessageInput = () => {
                     placeholder="Type a message..."
                     style={{ border: 'none', resize: 'none', height: '100%' }}
                     value={input}
-                    es
                     onChange={(event) => setInput(event.target.value)}
                     onKeyDown={(event) => {
                         if (

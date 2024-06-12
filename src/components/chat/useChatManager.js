@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useContext, useEffect, useCallback } from 'react';
 import { SnackbarContext } from '../../contexts/SnackbarContext';
 import { processToken } from './utils/processToken';
 
@@ -19,9 +19,22 @@ export const useChatManager = () => {
         setIsLoading(true);
     }, []);
 
-    const getMessages = (chatId) => {
+    const getChatHistory = (chatId) => {
         return messages[chatId] || [];
     };
+
+    const getMessages = useCallback(() => {
+        try {
+            const localMessages = JSON.parse(localStorage.getItem('messages'));
+            if (localMessages) {
+                // get messages for given id
+                setMessages(localMessages);
+            }
+        } catch (error) {
+            console.error(error);
+            showSnackbar(`Network or fetch error: ${error.message}`, 'error');
+        }
+    }, [showSnackbar]);
 
     const addMessage = async (chatId, newMessage) => {
         setMessages((prevMessageParts) => {
@@ -43,7 +56,7 @@ export const useChatManager = () => {
         };
         addMessage(chatId, userMessage);
 
-        const chatHistory = await getMessages(chatId);
+        const chatHistory = getChatHistory(chatId);
 
         try {
             const response = await sendUserMessage(
@@ -131,57 +144,16 @@ export const useChatManager = () => {
                 [chatId]: updatedMessages,
             };
 
-            // Update chatArray state to reflect the new messages
-            setChatArray((prevChatArray) => {
-                const updatedChatArray = prevChatArray.map((chat) => {
-                    if (chat.chatId === chatId) {
-                        return {
-                            ...chat,
-                            messages: updatedMessages,
-                        };
-                    }
-                    return chat;
-                });
-
-                localStorage.setItem(
-                    'chatArray',
-                    JSON.stringify(updatedChatArray)
-                );
-                return updatedChatArray;
-            });
-
             localStorage.setItem('messages', JSON.stringify(newMessagesState));
             return newMessagesState;
         });
     };
 
-    const clearChat = async (chatId) => {
+    const clearChat = async () => {
         try {
-            // Update the chatArray state
-            setChatArray((prevChatArray) => {
-                const updatedChatArray = prevChatArray.map((chat) => {
-                    if (chat.chatId === chatId) {
-                        return { ...chat, messages: [] };
-                    }
-                    return chat;
-                });
-
-                localStorage.setItem(
-                    'chatArray',
-                    JSON.stringify(updatedChatArray)
-                );
-                return updatedChatArray;
-            });
-
             // Update the messages state for the UI to reflect the cleared messages
-            setMessages((prevMessages) => {
-                const updatedMessages = { ...prevMessages, [chatId]: [] };
-                localStorage.setItem(
-                    'messages',
-                    JSON.stringify(updatedMessages)
-                );
-                return updatedMessages;
-            });
+            setMessages({});
+            localStorage.removeItem('messages');
         } catch (error) {
             console.error(error);
             showSnackbar(`Network or fetch error: ${error.message}`, 'error');
@@ -196,6 +168,7 @@ export const useChatManager = () => {
         isLoading,
         addMessage,
         sendMessage,
+        getMessages,
         clearChat,
     };
 };

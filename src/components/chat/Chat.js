@@ -12,22 +12,17 @@ import {
 } from './agentStyledComponents';
 
 const Chat = ({ chatId }) => {
-    const nodeRef = useRef(null);
-    const { messages } = useContext(ChatContext);
+    const { messages, getMessages } = useContext(ChatContext);
 
-    // scrolls chat window to the bottom
     useEffect(() => {
-        const node = nodeRef.current;
-        if (node) {
-            node.scroll(0, node.scrollHeight);
-        }
-    }, [messages]);
+        getMessages();
+    }, [getMessages]);
 
     return (
         <ChatContainerStyled>
             <ChatBar chatName={'Ai Assistant'} />
-            <MessagesContainer xs={9} id="messages-container">
-                <MessageArea ref={nodeRef}>
+            <MessagesContainer id="messages-container">
+                <MessageArea>
                     {messages[chatId]?.map((message, index) => {
                         let formattedMessage = message;
                         if (message.type === 'database') {

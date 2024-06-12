@@ -1,52 +1,5 @@
 import styled from 'styled-components';
-import { Button, Input, ListGroup, ListGroupItem } from 'reactstrap';
-
-// AgentDash.js
-export const SettingsSubmitButton = styled(Button)`
-    background-color: transparent;
-    font-family: 'Arial, sans-serif';
-    font-weight: bold;
-    font-size: 1rem;
-    &:hover {
-        background-color: blue;
-        color: black;
-    }
-`;
-
-SettingsSubmitButton.defaultProps = {
-    color: 'outline-primary',
-};
-
-export const SettingsMenuButton = styled(Button)`
-    font-family: 'Arial, sans-serif';
-    font-weight: bold;
-    font-size: 1rem;
-    width: 33%;
-    height: 40px;
-    background-color: transparent;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    &:hover {
-        background-color: blue;
-        color: black;
-    }
-`;
-
-SettingsMenuButton.defaultProps = {
-    color: 'outline-primary',
-};
-
-export const InvisibleInput = styled(Input)`
-    width: 100%;
-    height: 40px;
-    font-size: inherit;
-    padding: 0;
-    color: black;
-    border: none;
-    &:focus {
-        box-shadow: none;
-    }
-`;
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 export const ChatContainerStyled = styled.div`
     display: flex;

@@ -1,10 +1,7 @@
-import { useContext } from 'react';
-import { ThemeContext } from 'styled-components';
 import { Icon } from '@iconify/react';
 import { MessageContainer, MessageContent } from '../agentStyledComponents';
 
 const AgentMessage = ({ message }) => {
-    const theme = useContext(ThemeContext);
 
     return (
         <MessageContainer messageFrom={message.message_from}>
