@@ -73,7 +73,7 @@ export const useChatManager = () => {
 
     const sendUserMessage = async (chatId, userMessage, chatHistory) => {
         const response = await fetch(
-            `http://127.0.0.1:30000/chatMobile/messages`,
+            `${BACKEND_URL_PROD}/chatMobile/messages`,
             {
                 method: 'POST',
                 headers: {
