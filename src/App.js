@@ -84,6 +84,7 @@ const App = () => {
                     <Education />
                     <Skills />
                     <Portfolio />
+                    <ContactMe />
                     <Footer />
                     <FontAwesomeIcon
                         icon={faComments}

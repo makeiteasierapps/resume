@@ -3,22 +3,14 @@ import { Tooltip } from 'reactstrap';
 import { FaTimes, FaCommentSlash } from 'react-icons/fa';
 import { ChatContext } from '../../../contexts/ChatContext';
 
-import {
-    Bar,
-    ClearAndTrashIcons,
-    StyledIconButton,
-} from '../agentStyledComponents';
+import { Bar, StyledIconButton } from '../agentStyledComponents';
 
 const ChatBar = ({ chatName, chatId }) => {
     const { setIsChatOpen, clearChat } = useContext(ChatContext);
-    const [tooltipOpen, setTooltipOpen] = useState({
-        settings: false,
-        clearChat: false,
-        delete: false,
-    });
+    const [tooltipOpen, setTooltipOpen] = useState(false);
 
-    const toggleTooltip = (name) => {
-        setTooltipOpen((prev) => ({ ...prev, [name]: !prev[name] }));
+    const toggleTooltip = () => {
+        setTooltipOpen(!tooltipOpen);
     };
 
     return (
@@ -66,8 +58,8 @@ const ChatBar = ({ chatName, chatId }) => {
                 </StyledIconButton>
                 <Tooltip
                     target="clearChatButton"
-                    isOpen={tooltipOpen.clearChat}
-                    toggle={() => toggleTooltip('clearChat')}
+                    isOpen={tooltipOpen}
+                    toggle={toggleTooltip}
                     placement="top"
                 >
                     Clear Chat
