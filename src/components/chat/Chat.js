@@ -13,10 +13,17 @@ import {
 
 const Chat = ({ chatId }) => {
     const { messages, getMessages } = useContext(ChatContext);
+    const messagesEndRef = useRef(null);
 
     useEffect(() => {
         getMessages();
     }, [getMessages]);
+
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages]);
 
     return (
         <ChatContainerStyled>
@@ -52,6 +59,7 @@ const Chat = ({ chatId }) => {
                             );
                         }
                     })}
+                    <div ref={messagesEndRef} />
                 </MessageArea>
                 <MessageInput />
             </MessagesContainer>

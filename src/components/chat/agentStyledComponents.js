@@ -4,17 +4,20 @@ import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 export const ChatContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     margin-bottom: 24px;
     width: 40%;
+    max-width: 40%;
+    min-width: 300px;
     min-height: 40%;
     height: 7%;
-    border-radius: 7px;
-    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.2);
-    background-color: white; 
-    z-index: 1000; 
+    border-radius: 20px;
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.47);
+    background-color: white;
+    z-index: 1000;
+    overflow: auto;
 `;
 
 export const MessageArea = styled(ListGroup)`
@@ -57,7 +60,7 @@ export const MessageContent = styled.div`
 
 export const Bar = styled.div`
     position: relative;
-    background-color: darkgray;
+    background-color: transparent;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -73,12 +76,4 @@ export const StyledIconButton = styled(Button)`
         background-color: transparent;
         color: gray;
     }
-`;
-
-
-export const InputArea = styled.div`
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 `;

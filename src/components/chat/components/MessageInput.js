@@ -10,13 +10,14 @@ const StyledInputGroup = styled(InputGroup)`
     align-items: center;
     width: 100%;
     position: relative;
-    border: 2px solid lightgray;
+    border: none;
     border-radius: 4px;
 `;
 
 const StyledInput = styled(Input)`
     border: none;
     resize: none;
+    padding: 6px 0px 6px 10px;
     height: 100%;
     &:focus {
         outline: none;
@@ -29,40 +30,38 @@ const MessageInput = () => {
     const [input, setInput] = useState('');
 
     return (
-        <InputArea>
-            <StyledInputGroup>
-                <StyledInput
-                    type="textarea"
-                    placeholder="Type a message..."
-                    style={{ border: 'none', resize: 'none', height: '100%' }}
-                    value={input}
-                    onChange={(event) => setInput(event.target.value)}
-                    onKeyDown={(event) => {
-                        if (
-                            event.key === 'Enter' &&
-                            !event.shiftKey &&
-                            input.trim() !== ''
-                        ) {
-                            event.preventDefault();
-                            sendMessage(input);
-                            setInput('');
-                        }
-                    }}
-                />
-
-                <Button
-                    color="transparent"
-                    style={{ border: 'none' }}
-                    disabled={!input}
-                    onClick={() => {
+        <StyledInputGroup>
+            <StyledInput
+                type="textarea"
+                rows={1}
+                placeholder="Type a message..."
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => {
+                    if (
+                        event.key === 'Enter' &&
+                        !event.shiftKey &&
+                        input.trim() !== ''
+                    ) {
+                        event.preventDefault();
                         sendMessage(1, input);
                         setInput('');
-                    }}
-                >
-                    <FaPaperPlane />
-                </Button>
-            </StyledInputGroup>
-        </InputArea>
+                    }
+                }}
+            />
+
+            <Button
+                color="transparent"
+                style={{ border: 'none', padding: '0px 10px 3px 7px' }}
+                disabled={!input}
+                onClick={() => {
+                    sendMessage(1, input);
+                    setInput('');
+                }}
+            >
+                <FaPaperPlane />
+            </Button>
+        </StyledInputGroup>
     );
 };
 
