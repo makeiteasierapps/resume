@@ -4,17 +4,17 @@ import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 export const ChatContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
-    position: fixed; /* Change from relative to fixed */
-    bottom: 20px; /* Align with the icon */
-    right: 20px; /* Align with the icon */
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
     margin-bottom: 24px;
     width: 40%;
     min-height: 40%;
     height: 7%;
     border-radius: 7px;
     box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.2);
-    background-color: white; /* Ensure it has a background */
-    z-index: 1000; /* Ensure it appears above other elements */
+    background-color: white; 
+    z-index: 1000; 
 `;
 
 export const MessageArea = styled(ListGroup)`
@@ -66,26 +66,7 @@ export const Bar = styled.div`
     border-bottom: 2px solid gray;
 `;
 
-export const ClearAndTrashIcons = styled.div`
-    transform: translate(10%, -40%);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 9px;
-`;
-
 export const StyledIconButton = styled(Button)`
-    padding: 0;
-    color: black;
-    &:hover {
-        background-color: transparent;
-        color: gray;
-    }
-`;
-
-export const CloseIconButton = styled(Button)`
-    padding: 1px;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.43);
     color: black;
     &:hover {
@@ -93,6 +74,7 @@ export const CloseIconButton = styled(Button)`
         color: gray;
     }
 `;
+
 
 export const InputArea = styled.div`
     padding: 20px;

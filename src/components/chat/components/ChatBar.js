@@ -7,7 +7,6 @@ import {
     Bar,
     ClearAndTrashIcons,
     StyledIconButton,
-    CloseIconButton,
 } from '../agentStyledComponents';
 
 const ChatBar = ({ chatName, chatId }) => {
@@ -31,7 +30,7 @@ const ChatBar = ({ chatName, chatId }) => {
                     width: '33%',
                 }}
             >
-                <CloseIconButton
+                <StyledIconButton
                     aria-label="close"
                     onClick={() => {
                         if (setIsChatOpen) {
@@ -39,8 +38,8 @@ const ChatBar = ({ chatName, chatId }) => {
                         }
                     }}
                 >
-                    <FaTimes style={{ fontSize: '1.1rem' }} />
-                </CloseIconButton>
+                    <FaTimes />
+                </StyledIconButton>
             </div>
             <div
                 style={{
@@ -49,7 +48,7 @@ const ChatBar = ({ chatName, chatId }) => {
                     width: '33%',
                 }}
             >
-                <h6>{chatName}</h6>
+                <h6 style={{ margin: 0 }}>{chatName}</h6>
             </div>
             <div
                 style={{
@@ -58,23 +57,21 @@ const ChatBar = ({ chatName, chatId }) => {
                     width: '33%',
                 }}
             >
-                <ClearAndTrashIcons>
-                    <StyledIconButton
-                        id="clearChatButton"
-                        aria-label="clear_chat"
-                        onClick={() => clearChat()}
-                    >
-                        <FaCommentSlash />
-                    </StyledIconButton>
-                    <Tooltip
-                        target="clearChatButton"
-                        isOpen={tooltipOpen.clearChat}
-                        toggle={() => toggleTooltip('clearChat')}
-                        placement="top"
-                    >
-                        Clear Chat
-                    </Tooltip>
-                </ClearAndTrashIcons>
+                <StyledIconButton
+                    id="clearChatButton"
+                    aria-label="clear_chat"
+                    onClick={() => clearChat()}
+                >
+                    <FaCommentSlash />
+                </StyledIconButton>
+                <Tooltip
+                    target="clearChatButton"
+                    isOpen={tooltipOpen.clearChat}
+                    toggle={() => toggleTooltip('clearChat')}
+                    placement="top"
+                >
+                    Clear Chat
+                </Tooltip>
             </div>
         </Bar>
     );
