@@ -70,6 +70,7 @@ export const useChatManager = () => {
     };
 
     const sendUserMessage = async (chatId, userMessage, chatHistory) => {
+        console.log(messages);
         const response = await fetch(
             `http://127.0.0.1:30000/chatMobile/messages`,
             {
@@ -125,6 +126,7 @@ export const useChatManager = () => {
             });
             completeMessage += messages.join('');
         }
+        console.log(completeMessage);
         await updateMessagesState(chatId, completeMessage);
     };
 
