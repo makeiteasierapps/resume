@@ -5,7 +5,7 @@ import { ChatContext } from '../../../contexts/ChatContext';
 
 import { Bar, StyledIconButton } from '../agentStyledComponents';
 
-const ChatBar = ({ chatName, chatId }) => {
+const ChatBar = ({ chatName }) => {
     const { setIsChatOpen, clearChat } = useContext(ChatContext);
     const [tooltipOpen, setTooltipOpen] = useState(false);
 

@@ -71,7 +71,7 @@ export const useChatManager = () => {
 
     const sendUserMessage = async (chatId, userMessage, chatHistory) => {
         const response = await fetch(
-            `${BACKEND_URL_PROD}/chatMobile/messages`,
+            `http://127.0.0.1:30000/chatMobile/messages`,
             {
                 method: 'POST',
                 headers: {
@@ -80,10 +80,12 @@ export const useChatManager = () => {
                 },
                 body: JSON.stringify({
                     chatId: chatId,
+                    projectId: '666e139da8a159c87447c8c1',
+                    dbName: 'paxxium',
                     chatHistory: chatHistory,
                     userMessage: userMessage,
                     saveToDb: false,
-                    createVectorPipeline: false,
+                    createVectorPipeline: true,
                 }),
             }
         );
