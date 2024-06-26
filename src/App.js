@@ -105,7 +105,7 @@ const App = () => {
                     <ContactMe />
                     <Footer />
                 </div>
-                <div className="chat-container">
+                {/* <div className="chat-container">
                     {transitions((style, item) =>
                         item ? (
                             <animated.div style={style} className="chat-wrapper">
@@ -121,7 +121,7 @@ const App = () => {
                             </animated.div>
                         )
                     )}
-                </div>
+                </div> */}
             </>
         </ThemeContext.Provider>
     );
