@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from './contexts/ThemeContext';
+import { useTransition, animated } from 'react-spring';
 import NavBar from './components/Header';
 import Skills from './components/Skills';
 import Education from './components/Education';
@@ -56,25 +57,42 @@ const App = () => {
         console.log(activeSection);
     }, [activeSection]);
 
-    const getIconColor = () => {
+    const setColors = () => {
+        let textColor, backgroundColor;
         switch (activeSection) {
             case 'home':
-                return '#000';
-            case 'education':
-                return '#fff';
             case 'skills':
-                return '#000';
-            case 'portfolio':
-                return '#fff';
             case 'contact':
-                return '#000';
+                textColor = '#fff';
+                backgroundColor = '#000';
+                break;
+            case 'education':
+            case 'portfolio':
             case 'footer':
-                return '#fff';
+                textColor = '#000';
+                backgroundColor = '#fff';
+                break;
             default:
-                return '#000';
+                textColor = '#fff';
+                backgroundColor = '#000';
         }
+
+        document.documentElement.style.setProperty('--text-color', textColor);
+        document.documentElement.style.setProperty(
+            '--background-color',
+            backgroundColor
+        );
     };
 
+    useEffect(() => {
+        setColors();
+    }, [activeSection]);
+
+    const transitions = useTransition(isChatOpen, {
+        from: { opacity: 0, transform: 'translateY(100%)' },
+        enter: { opacity: 1, transform: 'translateY(0%)' },
+        leave: { opacity: 0, transform: 'translateY(100%)' },
+    });
     return (
         <ThemeContext.Provider value={ThemeContext._currentValue}>
             <>
@@ -86,20 +104,24 @@ const App = () => {
                     <Portfolio />
                     <ContactMe />
                     <Footer />
-                    <FontAwesomeIcon
-                        icon={faComments}
-                        style={{
-                            position: 'fixed',
-                            bottom: '20px',
-                            right: '20px',
-                            fontSize: '2rem',
-                            color: getIconColor(),
-                            cursor: 'pointer',
-                        }}
-                        onClick={() => setIsChatOpen(!isChatOpen)}
-                    />
                 </div>
-                {isChatOpen && <Chat chatId={1} />}
+                <div className="chat-container">
+                    {transitions((style, item) =>
+                        item ? (
+                            <animated.div style={style} className="chat-wrapper">
+                                <Chat chatId={1} />
+                            </animated.div>
+                        ) : (
+                            <animated.div
+                                style={style}
+                                className="chat-button"
+                                onClick={() => setIsChatOpen(true)}
+                            >
+                                Chat Now
+                            </animated.div>
+                        )
+                    )}
+                </div>
             </>
         </ThemeContext.Provider>
     );

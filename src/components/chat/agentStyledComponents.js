@@ -4,19 +4,9 @@ import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 export const ChatContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    margin-bottom: 24px;
-    width: 40%;
-    max-width: 40%;
-    min-width: 300px;
-    min-height: 40%;
-    height: 7%;
-    border-radius: 20px;
-    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.47);
+    width: 100%;
+    height: 100%;
     background-color: white;
-    overflow: auto;
 `;
 
 export const MessageArea = styled(ListGroup)`
