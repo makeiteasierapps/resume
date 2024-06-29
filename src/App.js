@@ -53,9 +53,7 @@ const App = () => {
         };
     }, []);
 
-    useEffect(() => {
-        console.log(activeSection);
-    }, [activeSection]);
+    useEffect(() => {}, [activeSection]);
 
     const setColors = () => {
         let textColor, backgroundColor;
@@ -105,10 +103,13 @@ const App = () => {
                     <ContactMe />
                     <Footer />
                 </div>
-                {/* <div className="chat-container">
+                <div className="chat-container">
                     {transitions((style, item) =>
                         item ? (
-                            <animated.div style={style} className="chat-wrapper">
+                            <animated.div
+                                style={style}
+                                className="chat-wrapper"
+                            >
                                 <Chat chatId={1} />
                             </animated.div>
                         ) : (
@@ -121,7 +122,7 @@ const App = () => {
                             </animated.div>
                         )
                     )}
-                </div> */}
+                </div>
             </>
         </ThemeContext.Provider>
     );

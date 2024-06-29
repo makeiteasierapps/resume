@@ -1,6 +1,6 @@
 import { formatStreamMessage } from './messageFormatter';
 
-const handleIncomingMessageStream = (
+export const handleIncomingMessageStream = (
     prevMessage,
     id,
     tokenObj,
@@ -22,21 +22,24 @@ const handleIncomingMessageStream = (
         language
     );
 
-    // Start of a debate Stream
-    if (!prevMessage[id] || prevMessage[id].length === 0) {
-        return {
-            ...prevMessage,
-            [id]: [messagePartsArray],
-        };
+    if (!prevMessage[id]) {
+        prevMessage[id] = [];
     }
 
-    const lastMessageFrom =
-        prevMessage[id][prevMessage[id].length - 1].message_from;
-    // If this is truthy that means the last message is an object and this is a start of a new stream
-    if (lastMessageFrom) {
+    if (
+        prevMessage[id].length === 0 ||
+        prevMessage[id][prevMessage[id].length - 1].message_from === 'user'
+    ) {
         return {
             ...prevMessage,
-            [id]: [...prevMessage[id], messagePartsArray],
+            [id]: [
+                ...prevMessage[id],
+                {
+                    content: messagePartsArray,
+                    message_from: 'agent',
+                    type: 'stream',
+                },
+            ],
         };
     } else {
         const newPrevMessage = { ...prevMessage };
@@ -46,17 +49,17 @@ const handleIncomingMessageStream = (
 
         // Check if the last message is of type 'text' and append the new content to it
         // Get the last object in the lastMessage array
-        const lastMessageObject = lastMessage[lastMessage.length - 1];
+        // this is done to handle when there might be alternating code and text blocks
+        const lastMessageObject =
+            lastMessage.content[lastMessage.content.length - 1];
+
         if (lastMessageObject.type === messagePartsArray[0].type) {
             // If the types match, append the new content to the last object's content
             lastMessageObject.content += messagePartsArray[0].content;
         } else {
             // If the types do not match, add the new result as a new object in the lastMessage array
-            lastMessage.push(messagePartsArray[0]);
+            lastMessage.content.push(messagePartsArray[0]);
         }
-
-        // Update the last message in newPrevMessage
-        newPrevMessage[id][lastMessageIndex] = lastMessage;
 
         // Return the updated messages array without spreading it into a new array
         return newPrevMessage;
@@ -64,70 +67,46 @@ const handleIncomingMessageStream = (
 };
 
 export const processToken = (
-    token,
+    tokenObj,
     setInsideCodeBlock,
-    insideCodeBlock,
-    setMessages,
-    id,
     ignoreNextTokenRef,
     languageRef
 ) => {
     const codeStartIndicator = /```/g;
     const codeEndIndicator = /``/g;
-    let messageContent = token.content;
+    let messageContent = tokenObj.content;
+
     if (ignoreNextTokenRef.current) {
-        if (token.content.trim() !== '`') {
+        if (tokenObj.content !== '`') {
             // This means the token is not a backtick, so it should be the language
-            languageRef.current = token.content.trim();
+            languageRef.current = tokenObj.content;
         }
 
         // Reset the flag after processing the token, regardless of its content
         ignoreNextTokenRef.current = false;
-        return;
+        return tokenObj;
     }
 
     // Check if we are not ignoring this token and if there is a language set
     // This is the next tokenObj after we captured the language.
     if (!ignoreNextTokenRef.current && languageRef.current) {
         // Add the language property to the token object
-        token.language = languageRef.current;
-        //Removes a new line character
-        token.content = ' ';
+        tokenObj.language = languageRef.current;
         // Reset languageRef as it has been used for this code block
         languageRef.current = null;
     }
 
-    if (ignoreNextTokenRef.current) {
-        ignoreNextTokenRef.current = false;
-
-        return;
-    }
-
     if (codeStartIndicator.test(messageContent)) {
         setInsideCodeBlock((prevInsideCodeBlock) => !prevInsideCodeBlock);
-
         ignoreNextTokenRef.current = true;
-
-        return;
+        return tokenObj;
     }
 
     if (codeEndIndicator.test(messageContent)) {
         setInsideCodeBlock((prevInsideCodeBlock) => !prevInsideCodeBlock);
-
         ignoreNextTokenRef.current = true;
-
-        return;
+        return tokenObj;
     }
 
-    // If we reach here, it means the token is not a code start or end indicator
-    // So, we can add it to the messages
-    setMessages((prevMessage) => {
-        const newMessageParts = handleIncomingMessageStream(
-            prevMessage,
-            id,
-            token,
-            insideCodeBlock
-        );
-        return newMessageParts;
-    });
+    return tokenObj;
 };

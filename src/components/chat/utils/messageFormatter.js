@@ -7,7 +7,7 @@ export const formatBlockMessage = message => {
 
   while ((match = codeblock.exec(message.content)) !== null) {
     let lang = match[1] || 'markdown'; // Default to markdown if no language is specified
-    const code = match[2].trim();
+    const code = match[2];
 
     // Adjust language mapping if necessary
     if (lang === 'jsx') {

@@ -7,11 +7,9 @@ import { SnackbarProvider } from './contexts/SnackbarContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <SnackbarProvider>
-            <ChatProvider>
-                <App />
-            </ChatProvider>
-        </SnackbarProvider>
-    </React.StrictMode>
+    <SnackbarProvider>
+        <ChatProvider>
+            <App />
+        </ChatProvider>
+    </SnackbarProvider>
 );

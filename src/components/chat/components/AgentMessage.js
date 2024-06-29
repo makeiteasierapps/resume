@@ -2,6 +2,10 @@ import { Icon } from '@iconify/react';
 import { MessageContainer, MessageContent } from '../agentStyledComponents';
 
 const AgentMessage = ({ message }) => {
+    // Ensure message.content is always an array
+    const contentArray = Array.isArray(message.content)
+        ? message.content
+        : [{ type: 'text', content: message.content }];
 
     return (
         <MessageContainer messageFrom={message.message_from}>
@@ -16,7 +20,7 @@ const AgentMessage = ({ message }) => {
             />
 
             <MessageContent>
-                {message.map((msg, index) => {
+                {contentArray.map((msg, index) => {
                     if (msg.type === 'text') {
                         return <div key={`text${index}`}>{msg.content}</div>;
                     } else if (msg.type === 'code') {
