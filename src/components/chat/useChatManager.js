@@ -10,18 +10,13 @@ export const useChatManager = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [socket, setSocket] = useState(null);
 
-    const BACKEND_URL = process.env.REACT_APP_LOCAL_DEV
-        ? process.env.REACT_APP_BACKEND_URL
-        : process.env.REACT_APP_URL_PROD;
-
-    const API_KEY = process.env.REACT_APP_API_KEY;
+    const BACKEND_URL =
+        process.env.REACT_APP_LOCAL_DEV === 'true'
+            ? process.env.REACT_APP_BACKEND_URL
+            : process.env.REACT_APP_URL_PROD;
 
     useEffect(() => {
-        const newSocket = io(BACKEND_URL, {
-            extraHeaders: {
-                'X-API-Key': API_KEY,
-            },
-        });
+        const newSocket = io(`ws://${BACKEND_URL}`);
 
         setSocket(newSocket);
 
@@ -31,6 +26,10 @@ export const useChatManager = () => {
 
         newSocket.on('disconnect', () => {
             console.log('Disconnected from WebSocket server');
+        });
+
+        newSocket.on('connect_error', (error) => {
+            console.log('Connect error', error);
         });
 
         return () => {
@@ -90,7 +89,7 @@ export const useChatManager = () => {
                 chatHistory: chatHistory,
                 userMessage: userMessage,
                 saveToDb: false,
-                createVectorPipeline: false,
+                createVectorPipeline: true,
             });
         } catch (error) {
             console.error(error);
