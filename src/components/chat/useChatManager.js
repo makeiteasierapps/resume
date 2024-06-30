@@ -16,7 +16,8 @@ export const useChatManager = () => {
             : process.env.REACT_APP_URL_PROD;
 
     useEffect(() => {
-        const newSocket = io(`ws://${BACKEND_URL}`);
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const newSocket = io(`${protocol}://${BACKEND_URL}`);
 
         setSocket(newSocket);
 
