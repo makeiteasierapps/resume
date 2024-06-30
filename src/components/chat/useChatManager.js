@@ -1,18 +1,12 @@
-import { useState, useRef, useContext, useEffect, useCallback } from 'react';
+import { useState, useContext, useEffect, useCallback } from 'react';
 import { SnackbarContext } from '../../contexts/SnackbarContext';
-import {
-    processToken,
-    handleIncomingMessageStream,
-} from './utils/processToken';
+import { processIncomingStream } from './utils/processIncomingStream.js';
 import { io } from 'socket.io-client';
 
 export const useChatManager = () => {
     const { showSnackbar } = useContext(SnackbarContext);
     const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState({});
-    const [insideCodeBlock, setInsideCodeBlock] = useState(false);
-    const ignoreNextTokenRef = useRef(false);
-    const languageRef = useRef(null);
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [socket, setSocket] = useState(null);
 
@@ -96,7 +90,7 @@ export const useChatManager = () => {
                 chatHistory: chatHistory,
                 userMessage: userMessage,
                 saveToDb: false,
-                createVectorPipeline: true,
+                createVectorPipeline: false,
             });
         } catch (error) {
             console.error(error);
@@ -104,39 +98,25 @@ export const useChatManager = () => {
         }
     };
 
-    const handleStreamingResponse = useCallback(
-      async (data) => {
-          if (data.type === 'end_of_stream') {
-              setMessages((prevMessage) => {
-                  const newPrevMessage = { ...prevMessage };
-                  const lastMessageIndex = newPrevMessage['1'].length - 1;
-                  let lastMessage = newPrevMessage['1'][lastMessageIndex];
+    const handleStreamingResponse = useCallback(async (data) => {
+        if (data.type === 'end_of_stream') {
+            console.log('data', data);
+        } else {
+            setMessages((prevMessage) => {
+                const newMessageParts = processIncomingStream(
+                    prevMessage,
+                    '1',
+                    data
+                );
+                localStorage.setItem(
+                    'messages',
+                    JSON.stringify(newMessageParts)
+                );
+                return newMessageParts;
+            });
+        }
+    }, []);
 
-                  // Replace the content array with the final content
-                  lastMessage.content = data.content;
-                  localStorage.setItem('messages', JSON.stringify(newPrevMessage));
-                  return newPrevMessage;
-              });
-          } else {
-              const updatedTokenObj = processToken(
-                  data,
-                  setInsideCodeBlock,
-                  ignoreNextTokenRef,
-                  languageRef
-              );
-              setMessages((prevMessage) => {
-                  const newMessageParts = handleIncomingMessageStream(
-                      prevMessage,
-                      '1',
-                      updatedTokenObj,
-                      insideCodeBlock
-                  );
-                  return newMessageParts;
-              });
-          }
-      },
-      [insideCodeBlock]
-  );
     useEffect(() => {
         if (!socket) return;
 
