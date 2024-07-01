@@ -103,7 +103,12 @@ const App = () => {
                     <ContactMe />
                     <Footer />
                 </div>
-                <div className="chat-container">
+                <div
+                    className="chat-container"
+                    style={{
+                        pointerEvents: isChatOpen ? 'auto' : 'none',
+                    }}
+                >
                     {transitions((style, item) =>
                         item ? (
                             <animated.div
@@ -112,17 +117,18 @@ const App = () => {
                             >
                                 <Chat chatId={1} />
                             </animated.div>
-                        ) : (
-                            <animated.div
-                                style={style}
-                                className="chat-button"
-                                onClick={() => setIsChatOpen(true)}
-                            >
-                                Chat Now
-                            </animated.div>
-                        )
+                        ) : null
                     )}
                 </div>
+                {!isChatOpen && (
+                    <div
+                        className="chat-button"
+                        onClick={() => setIsChatOpen(true)}
+                        style={{ pointerEvents: 'auto' }}
+                    >
+                        <FontAwesomeIcon icon={faComments} size="lg" />
+                    </div>
+                )}
             </>
         </ThemeContext.Provider>
     );
