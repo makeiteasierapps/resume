@@ -19,7 +19,7 @@ const Header = () => {
                     justifyContent: 'center',
                     width: '100%',
                     fontFamily: theme.mainText,
-                    color: theme.lightBlue,
+                    color: 'white',
                     fontSize: 'clamp(25px, 3vw, 30px)',
                 }}
                 navbar
@@ -28,7 +28,7 @@ const Header = () => {
                     <NavLink
                         href="#home"
                         style={{
-                            color: theme.lightBlue,
+                            color: 'white',
                         }}
                     >
                         <FontAwesomeIcon id="HomeIcon" icon={faHome} />
@@ -38,7 +38,7 @@ const Header = () => {
                     <NavLink
                         href="#education"
                         style={{
-                            color: theme.lightBlue,
+                            color: 'white',
                         }}
                     >
                         <FontAwesomeIcon icon={faGraduationCap} />
@@ -48,7 +48,7 @@ const Header = () => {
                     <NavLink
                         href="#skills"
                         style={{
-                            color: theme.lightBlue,
+                            color: 'white',
                         }}
                     >
                         <FontAwesomeIcon icon={faCode} />
@@ -58,7 +58,7 @@ const Header = () => {
                     <NavLink
                         href="#portfolio"
                         style={{
-                            color: theme.lightBlue,
+                            color: 'white',
                         }}
                     >
                         <FontAwesomeIcon icon={faBriefcase} />
@@ -68,7 +68,7 @@ const Header = () => {
                     <NavLink
                         href="#contact"
                         style={{
-                            color: theme.lightBlue,
+                            color: 'white',
                         }}
                     >
                         <FontAwesomeIcon icon={faEnvelope} />
