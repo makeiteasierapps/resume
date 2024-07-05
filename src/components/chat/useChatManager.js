@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useCallback } from 'react';
+import { useState, useContext, useEffect, useCallback, useRef } from 'react';
 import { SnackbarContext } from '../../contexts/SnackbarContext';
 import { processIncomingStream } from './utils/processIncomingStream.js';
 import { io } from 'socket.io-client';
@@ -8,7 +8,7 @@ export const useChatManager = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState({});
     const [isChatOpen, setIsChatOpen] = useState(false);
-    const [socket, setSocket] = useState(null);
+    const socket = useRef(null);
 
     const BACKEND_URL =
         process.env.REACT_APP_LOCAL_DEV === 'true'
@@ -19,7 +19,7 @@ export const useChatManager = () => {
         const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
         const newSocket = io(`${protocol}://${BACKEND_URL}`);
 
-        setSocket(newSocket);
+        socket.current = newSocket;
 
         newSocket.on('connect', () => {
             console.log('Connected to WebSocket server');
@@ -37,6 +37,13 @@ export const useChatManager = () => {
             newSocket.disconnect();
         };
     }, []);
+
+    useEffect(() => {
+        if (socket.current) {
+            console.log('joining room');
+            socket.current.emit('join_room', { chatId: 1 });
+        }
+    }, [socket]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -70,7 +77,7 @@ export const useChatManager = () => {
     };
 
     const sendMessage = async (chatId, input) => {
-        if (!socket) return;
+        if (!socket.current) return;
 
         try {
             const userMessage = {
@@ -83,7 +90,7 @@ export const useChatManager = () => {
 
             const chatHistory = getChatHistory(chatId);
 
-            socket.emit('chat_request', {
+            socket.current.emit('chat_request', {
                 chatId: chatId,
                 projectId: '666e139da8a159c87447c8c1',
                 dbName: 'paxxium',
@@ -118,12 +125,12 @@ export const useChatManager = () => {
     }, []);
 
     useEffect(() => {
-        if (!socket) return;
+        if (!socket.current) return;
 
-        socket.on('chat_response', handleStreamingResponse);
+        socket.current.on('chat_response', handleStreamingResponse);
 
         return () => {
-            socket.off('chat_response', handleStreamingResponse);
+            socket.current.off('chat_response', handleStreamingResponse);
         };
     }, [handleStreamingResponse, socket]);
 
