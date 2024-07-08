@@ -17,17 +17,12 @@ export const StyledMarkdown = styled(Markdown)`
     }
 
     th {
-        background-color: #f2f2f2;
         font-weight: bold;
     }
 
-    tr:nth-child(even) {
-        background-color: #f8f8f8;
-    }
     td:first-child {
         width: 1%;
         word-break: keep-all;
-        
         text-align: center;
     }
 `;
