@@ -1,7 +1,30 @@
 import { Icon } from '@iconify/react';
 import { MessageContainer, MessageContent } from '../agentStyledComponents';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { twilight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import ReactMarkdown from 'react-markdown';
 
 const AgentMessage = ({ message }) => {
+    const components = {
+        code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || '');
+            return !inline && match ? (
+                <SyntaxHighlighter
+                    style={twilight}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                >
+                    {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+            ) : (
+                <code className={className} {...props}>
+                    {children}
+                </code>
+            );
+        },
+    };
+
     return (
         <MessageContainer messageFrom={message.message_from}>
             <Icon
@@ -19,20 +42,19 @@ const AgentMessage = ({ message }) => {
                     ? message.content.map((msg, index) => {
                           if (msg.type === 'text') {
                               return (
-                                  <div key={`text${index}`}>{msg.content}</div>
+                                  <ReactMarkdown components={components}>
+                                      {msg.content}
+                                  </ReactMarkdown>
                               );
                           } else if (msg.type === 'code') {
                               return (
-                                  <pre
+                                  <SyntaxHighlighter
                                       key={`code${index}`}
-                                      className={`language-${msg.language}`}
+                                      language={msg.language}
+                                      style={twilight}
                                   >
-                                      <code
-                                          dangerouslySetInnerHTML={{
-                                              __html: msg.content,
-                                          }}
-                                      />
-                                  </pre>
+                                      {msg.content}
+                                  </SyntaxHighlighter>
                               );
                           }
                           return null;
