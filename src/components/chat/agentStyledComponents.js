@@ -1,6 +1,36 @@
 import styled from 'styled-components';
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
+import Markdown from 'react-markdown';
 
+export const StyledMarkdown = styled(Markdown)`
+    table {
+        border-collapse: collapse;
+        margin: 15px 0;
+        width: 100%;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f8f8f8;
+    }
+    td:first-child {
+        width: 1%;
+        word-break: keep-all;
+        
+        text-align: center;
+    }
+`;
 export const ChatContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
@@ -33,7 +63,7 @@ export const MessageContainer = styled(ListGroupItem).withConfig({
     flex-direction: row;
     display: flex;
     align-items: flex-start;
-    padding-right: 50px;
+    padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
 `;

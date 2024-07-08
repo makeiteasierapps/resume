@@ -1,8 +1,12 @@
 import { Icon } from '@iconify/react';
-import { MessageContainer, MessageContent } from '../agentStyledComponents';
+import {
+    MessageContainer,
+    MessageContent,
+    StyledMarkdown,
+} from '../agentStyledComponents';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { twilight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const AgentMessage = ({ message }) => {
     const components = {
@@ -13,10 +17,9 @@ const AgentMessage = ({ message }) => {
                     style={twilight}
                     language={match[1]}
                     PreTag="div"
+                    children={String(children).replace(/\n$/, '')}
                     {...props}
-                >
-                    {String(children).replace(/\n$/, '')}
-                </SyntaxHighlighter>
+                />
             ) : (
                 <code className={className} {...props}>
                     {children}
@@ -42,9 +45,13 @@ const AgentMessage = ({ message }) => {
                     ? message.content.map((msg, index) => {
                           if (msg.type === 'text') {
                               return (
-                                  <ReactMarkdown components={components}>
+                                  <StyledMarkdown
+                                      key={`text${index}`}
+                                      components={components}
+                                      remarkPlugins={[remarkGfm]}
+                                  >
                                       {msg.content}
-                                  </ReactMarkdown>
+                                  </StyledMarkdown>
                               );
                           } else if (msg.type === 'code') {
                               return (
