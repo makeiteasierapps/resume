@@ -3,6 +3,19 @@ import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 import Markdown from 'react-markdown';
 
 export const StyledMarkdown = styled(Markdown)`
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6,
+    & p,
+    & ul,
+    & ol,
+    & li {
+        margin: 0;
+    }
+    ,
     table {
         border-collapse: collapse;
         margin: 15px 0;
