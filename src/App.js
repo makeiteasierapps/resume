@@ -98,53 +98,50 @@ const App = () => {
 
     return (
         <ThemeContext.Provider value={ThemeContext._currentValue}>
-            <div className="content-container">
-                {location.pathname.startsWith('/certifications') ? (
-                    <Routes>
-                        <Route
-                            path="/certifications/:certId"
-                            element={<Certification />}
-                        />
-                    </Routes>
-                ) : (
-                    <>
-                        <NavBar />
-                        <Home />
-                        <Education />
-                        <Skills />
-                        <Portfolio />
-                        <ContactMe />
-                        <div
-                            className="chat-container"
-                            style={{
-                                pointerEvents: isChatOpen ? 'auto' : 'none',
-                            }}
-                        >
-                            {transitions((style, item) =>
-                                item ? (
-                                    <animated.div
-                                        style={style}
-                                        className="chat-wrapper"
-                                    >
-                                        <Chat chatId={1} />
-                                    </animated.div>
-                                ) : null
-                            )}
-                        </div>
-                        {!isChatOpen && (
-                            <div
-                                className="chat-button"
-                                onClick={() => setIsChatOpen(true)}
-                                style={{ pointerEvents: 'auto' }}
-                            >
-                                <FontAwesomeIcon icon={faComments} size="lg" />
-                            </div>
+            {location.pathname.startsWith('/certifications') ? (
+                <Routes>
+                    <Route
+                        path="/certifications/:certId"
+                        element={<Certification />}
+                    />
+                </Routes>
+            ) : (
+                <div className="content-container">
+                    <NavBar />
+                    <Home />
+                    <Education />
+                    <Skills />
+                    <Portfolio />
+                    <ContactMe />
+                    <div
+                        className="chat-container"
+                        style={{
+                            pointerEvents: isChatOpen ? 'auto' : 'none',
+                        }}
+                    >
+                        {transitions((style, item) =>
+                            item ? (
+                                <animated.div
+                                    style={style}
+                                    className="chat-wrapper"
+                                >
+                                    <Chat chatId={1} />
+                                </animated.div>
+                            ) : null
                         )}
-                    </>
-                )}
-
-                <Footer />
-            </div>
+                    </div>
+                    {!isChatOpen && (
+                        <div
+                            className="chat-button"
+                            onClick={() => setIsChatOpen(true)}
+                            style={{ pointerEvents: 'auto' }}
+                        >
+                            <FontAwesomeIcon icon={faComments} size="lg" />
+                        </div>
+                    )}
+                    <Footer />
+                </div>
+            )}
         </ThemeContext.Provider>
     );
 };

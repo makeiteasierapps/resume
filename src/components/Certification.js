@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import '../styles/Certification.scss';
 import backEndWithNode from '../assets/badges/Backend_with_Node.png';
 import dataStructures from '../assets/badges/Data_Structure_and_Algorithms_with_Python.png';
 import devOps from '../assets/badges/DevOps_Course_Certificate.png';
@@ -44,9 +45,7 @@ const Certification = () => {
             <img
                 src={cert.image}
                 alt={cert.title}
-                
-                className="img-fluid mb-3"
-                style={{ maxWidth: '80%', padding: '20px' }}
+                className="img-fluid certification-image"
             />
         </div>
     );
