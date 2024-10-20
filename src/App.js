@@ -8,6 +8,8 @@ import Portfolio from './components/Portfolio';
 import ContactMe from './components/ContactMe';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import Certification from './components/Certification';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Chat from './components/chat/Chat';
 import { ChatContext } from './contexts/ChatContext';
@@ -18,6 +20,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
     const [activeSection, setActiveSection] = useState('home');
     const { isChatOpen, setIsChatOpen } = useContext(ChatContext);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -46,14 +49,15 @@ const App = () => {
             setActiveSection(currentSection);
         };
 
-        window.addEventListener('scroll', handleScroll);
+        // Only add the scroll event listener if we're not on the /certifications route
+        if (!location.pathname.includes('/certifications')) {
+            window.addEventListener('scroll', handleScroll);
+        }
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
-
-    useEffect(() => {}, [activeSection]);
+    }, [location]); // Trigger this effect when the location changes
 
     const setColors = () => {
         let textColor, backgroundColor;
@@ -91,45 +95,57 @@ const App = () => {
         enter: { opacity: 1, transform: 'translateY(0%)' },
         leave: { opacity: 0, transform: 'translateY(100%)' },
     });
+
     return (
         <ThemeContext.Provider value={ThemeContext._currentValue}>
-            <>
-                <div className="content-container">
-                    <NavBar />
-                    <Home />
-                    <Education />
-                    <Skills />
-                    <Portfolio />
-                    <ContactMe />
-                    <Footer />
-                </div>
-                <div
-                    className="chat-container"
-                    style={{
-                        pointerEvents: isChatOpen ? 'auto' : 'none',
-                    }}
-                >
-                    {transitions((style, item) =>
-                        item ? (
-                            <animated.div
-                                style={style}
-                                className="chat-wrapper"
+            <div className="content-container">
+                {/* Conditionally render sections based on the current path */}
+                {location.pathname.startsWith('/certifications') ? (
+                    <Routes>
+                        <Route
+                            path="/certifications/:certId"
+                            element={<Certification />}
+                        />
+                    </Routes>
+                ) : (
+                    <>
+                        <NavBar />
+                        <Home />
+                        <Education />
+                        <Skills />
+                        <Portfolio />
+                        <ContactMe />
+                        <div
+                            className="chat-container"
+                            style={{
+                                pointerEvents: isChatOpen ? 'auto' : 'none',
+                            }}
+                        >
+                            {transitions((style, item) =>
+                                item ? (
+                                    <animated.div
+                                        style={style}
+                                        className="chat-wrapper"
+                                    >
+                                        <Chat chatId={1} />
+                                    </animated.div>
+                                ) : null
+                            )}
+                        </div>
+                        {!isChatOpen && (
+                            <div
+                                className="chat-button"
+                                onClick={() => setIsChatOpen(true)}
+                                style={{ pointerEvents: 'auto' }}
                             >
-                                <Chat chatId={1} />
-                            </animated.div>
-                        ) : null
-                    )}
-                </div>
-                {!isChatOpen && (
-                    <div
-                        className="chat-button"
-                        onClick={() => setIsChatOpen(true)}
-                        style={{ pointerEvents: 'auto' }}
-                    >
-                        <FontAwesomeIcon icon={faComments} size="lg" />
-                    </div>
+                                <FontAwesomeIcon icon={faComments} size="lg" />
+                            </div>
+                        )}
+                    </>
                 )}
-            </>
+
+                <Footer />
+            </div>
         </ThemeContext.Provider>
     );
 };
