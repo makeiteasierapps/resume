@@ -17,26 +17,45 @@ const Certification = () => {
 
     // Placeholder: you can use certId to fetch data or match with local data
     const certifications = {
-        cert1: { title: "Backend With Node", image: backEndWithNode },
-        cert2: { title: "Data Structure and Algorithms with Python", image: dataStructures },
-        cert3: { title: "DevOps Course", image: devOps },
-        cert4: { title: "Front End Web and Mobile Development", image: frontEndWeb },
-        cert5: { title: "Frontend Honors", image: frontendHonors },
-        cert6: { title: "Fullstack Honors", image: fullstackHonors },
-        cert7: { title: "JavaScript Fundamentals", image: javascriptFundamentals },
-        cert8: { title: "MSE DevOps", image: mseDevOps },
-        cert9: { title: "React Course", image: reactCourse },
-        cert10: { title: "React Native", image: reactNative },
-        cert11: { title: "SQL and Data Modeling with Python", image: sqlDataModeling },
-        cert12: { title: "Web Development Fundamentals", image: webDevFundamentals },
+        backendWithNode: { title: 'Backend With Node', image: backEndWithNode },
+        dataStructures: {
+            title: 'Data Structure and Algorithms with Python',
+            image: dataStructures,
+        },
+        devOpsCourse: { title: 'DevOps Course', image: devOps },
+        javascriptFundamentals: {
+            title: 'JavaScript Fundamentals',
+            image: javascriptFundamentals,
+        },
+        frontEndWebWithReact: { title: 'React Course', image: reactCourse },
+        reactNative: { title: 'React Native', image: reactNative },
+        sqlDataModeling: {
+            title: 'SQL and Data Modeling with Python',
+            image: sqlDataModeling,
+        },
+        webDevFundamentals: {
+            title: 'Web Development Fundamentals',
+            image: webDevFundamentals,
+        },
     };
 
-    const cert = certifications[certId] || { title: "Unknown Certification", description: "No description available." };
+    const cert = certifications[certId] || {
+        title: 'Unknown Certification',
+        description: 'No description available.',
+    };
 
     return (
-        <div style={{ width: '100%', backgroundColor: 'red', height: '100%' }}>
-            <h1>{cert.title}</h1>
-            <img src={cert.image} alt={cert.title} />
+        <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
+            <div className="card border-0 shadow-sm">
+                <div className="card-body text-center">
+                    <img
+                        src={cert.image}
+                        alt={cert.title}
+                        className="img-fluid mb-3"
+                        style={{ maxWidth: '80%' }}
+                    />    
+                </div>
+            </div>
         </div>
     );
 };

@@ -99,7 +99,6 @@ const App = () => {
     return (
         <ThemeContext.Provider value={ThemeContext._currentValue}>
             <div className="content-container">
-                {/* Conditionally render sections based on the current path */}
                 {location.pathname.startsWith('/certifications') ? (
                     <Routes>
                         <Route
