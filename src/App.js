@@ -130,7 +130,7 @@ const App = () => {
                             ) : null
                         )}
                     </div>
-                    {!isChatOpen && (
+                    {/* {!isChatOpen && (
                         <div
                             className="chat-button"
                             onClick={() => setIsChatOpen(true)}
@@ -138,7 +138,7 @@ const App = () => {
                         >
                             <FontAwesomeIcon icon={faComments} size="lg" />
                         </div>
-                    )}
+                    )} */}
                     <Footer />
                 </div>
             )}
